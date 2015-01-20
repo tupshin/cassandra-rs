@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `cql_ffi` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, cql_ffi">
+
+    <title>cql_ffi - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>cql_ffi</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/cql_ffi/lib.rs.html#1-51'>[src]</a></span></h1>
+<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Struct_CassBytes_.html'
+                               title='cql_ffi::Struct_CassBytes_'>Struct_CassBytes_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Struct_CassDecimal_.html'
+                               title='cql_ffi::Struct_CassDecimal_'>Struct_CassDecimal_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Struct_CassInet_.html'
+                               title='cql_ffi::Struct_CassInet_'>Struct_CassInet_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Struct_CassLogMessage_.html'
+                               title='cql_ffi::Struct_CassLogMessage_'>Struct_CassLogMessage_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Struct_CassString_.html'
+                               title='cql_ffi::Struct_CassString_'>Struct_CassString_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Struct_CassUuid_.html'
+                               title='cql_ffi::Struct_CassUuid_'>Struct_CassUuid_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.CassError.html'
+                               title='cql_ffi::CassError'>CassError</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.CassSchemaMetaType.html'
+                               title='cql_ffi::CassSchemaMetaType'>CassSchemaMetaType</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.CassValue.html'
+                               title='cql_ffi::CassValue'>CassValue</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.CassValueType.html'
+                               title='cql_ffi::CassValueType'>CassValueType</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassBatch_.html'
+                               title='cql_ffi::Struct_CassBatch_'>Struct_CassBatch_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassCluster_.html'
+                               title='cql_ffi::Struct_CassCluster_'>Struct_CassCluster_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassCollection_.html'
+                               title='cql_ffi::Struct_CassCollection_'>Struct_CassCollection_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassFuture_.html'
+                               title='cql_ffi::Struct_CassFuture_'>Struct_CassFuture_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassIterator_.html'
+                               title='cql_ffi::Struct_CassIterator_'>Struct_CassIterator_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassPrepared_.html'
+                               title='cql_ffi::Struct_CassPrepared_'>Struct_CassPrepared_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassResult_.html'
+                               title='cql_ffi::Struct_CassResult_'>Struct_CassResult_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassRow_.html'
+                               title='cql_ffi::Struct_CassRow_'>Struct_CassRow_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassSchemaMetaField_.html'
+                               title='cql_ffi::Struct_CassSchemaMetaField_'>Struct_CassSchemaMetaField_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassSchemaMeta_.html'
+                               title='cql_ffi::Struct_CassSchemaMeta_'>Struct_CassSchemaMeta_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassSchema_.html'
+                               title='cql_ffi::Struct_CassSchema_'>Struct_CassSchema_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassSession_.html'
+                               title='cql_ffi::Struct_CassSession_'>Struct_CassSession_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassSsl_.html'
+                               title='cql_ffi::Struct_CassSsl_'>Struct_CassSsl_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassStatement_.html'
+                               title='cql_ffi::Struct_CassStatement_'>Struct_CassStatement_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Struct_CassUuidGen_.html'
+                               title='cql_ffi::Struct_CassUuidGen_'>Struct_CassUuidGen_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_BATCH_TYPE_COUNTER.html'
+                               title='cql_ffi::CASS_BATCH_TYPE_COUNTER'>CASS_BATCH_TYPE_COUNTER</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_BATCH_TYPE_LOGGED.html'
+                               title='cql_ffi::CASS_BATCH_TYPE_LOGGED'>CASS_BATCH_TYPE_LOGGED</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_BATCH_TYPE_UNLOGGED.html'
+                               title='cql_ffi::CASS_BATCH_TYPE_UNLOGGED'>CASS_BATCH_TYPE_UNLOGGED</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_COLLECTION_TYPE_LIST.html'
+                               title='cql_ffi::CASS_COLLECTION_TYPE_LIST'>CASS_COLLECTION_TYPE_LIST</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_COLLECTION_TYPE_MAP.html'
+                               title='cql_ffi::CASS_COLLECTION_TYPE_MAP'>CASS_COLLECTION_TYPE_MAP</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_COLLECTION_TYPE_SET.html'
+                               title='cql_ffi::CASS_COLLECTION_TYPE_SET'>CASS_COLLECTION_TYPE_SET</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_ALL.html'
+                               title='cql_ffi::CASS_CONSISTENCY_ALL'>CASS_CONSISTENCY_ALL</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_ANY.html'
+                               title='cql_ffi::CASS_CONSISTENCY_ANY'>CASS_CONSISTENCY_ANY</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_EACH_QUORUM.html'
+                               title='cql_ffi::CASS_CONSISTENCY_EACH_QUORUM'>CASS_CONSISTENCY_EACH_QUORUM</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_LOCAL_ONE.html'
+                               title='cql_ffi::CASS_CONSISTENCY_LOCAL_ONE'>CASS_CONSISTENCY_LOCAL_ONE</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_LOCAL_QUORUM.html'
+                               title='cql_ffi::CASS_CONSISTENCY_LOCAL_QUORUM'>CASS_CONSISTENCY_LOCAL_QUORUM</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_LOCAL_SERIAL.html'
+                               title='cql_ffi::CASS_CONSISTENCY_LOCAL_SERIAL'>CASS_CONSISTENCY_LOCAL_SERIAL</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_ONE.html'
+                               title='cql_ffi::CASS_CONSISTENCY_ONE'>CASS_CONSISTENCY_ONE</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_QUORUM.html'
+                               title='cql_ffi::CASS_CONSISTENCY_QUORUM'>CASS_CONSISTENCY_QUORUM</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_SERIAL.html'
+                               title='cql_ffi::CASS_CONSISTENCY_SERIAL'>CASS_CONSISTENCY_SERIAL</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_THREE.html'
+                               title='cql_ffi::CASS_CONSISTENCY_THREE'>CASS_CONSISTENCY_THREE</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_CONSISTENCY_TWO.html'
+                               title='cql_ffi::CASS_CONSISTENCY_TWO'>CASS_CONSISTENCY_TWO</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ERROR_SOURCE_COMPRESSION.html'
+                               title='cql_ffi::CASS_ERROR_SOURCE_COMPRESSION'>CASS_ERROR_SOURCE_COMPRESSION</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ERROR_SOURCE_LIB.html'
+                               title='cql_ffi::CASS_ERROR_SOURCE_LIB'>CASS_ERROR_SOURCE_LIB</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ERROR_SOURCE_NONE.html'
+                               title='cql_ffi::CASS_ERROR_SOURCE_NONE'>CASS_ERROR_SOURCE_NONE</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ERROR_SOURCE_SERVER.html'
+                               title='cql_ffi::CASS_ERROR_SOURCE_SERVER'>CASS_ERROR_SOURCE_SERVER</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ERROR_SOURCE_SSL.html'
+                               title='cql_ffi::CASS_ERROR_SOURCE_SSL'>CASS_ERROR_SOURCE_SSL</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ITERATOR_TYPE_COLLECTION.html'
+                               title='cql_ffi::CASS_ITERATOR_TYPE_COLLECTION'>CASS_ITERATOR_TYPE_COLLECTION</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ITERATOR_TYPE_MAP.html'
+                               title='cql_ffi::CASS_ITERATOR_TYPE_MAP'>CASS_ITERATOR_TYPE_MAP</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ITERATOR_TYPE_RESULT.html'
+                               title='cql_ffi::CASS_ITERATOR_TYPE_RESULT'>CASS_ITERATOR_TYPE_RESULT</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ITERATOR_TYPE_ROW.html'
+                               title='cql_ffi::CASS_ITERATOR_TYPE_ROW'>CASS_ITERATOR_TYPE_ROW</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ITERATOR_TYPE_SCHEMA_META.html'
+                               title='cql_ffi::CASS_ITERATOR_TYPE_SCHEMA_META'>CASS_ITERATOR_TYPE_SCHEMA_META</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_ITERATOR_TYPE_SCHEMA_META_FIELD.html'
+                               title='cql_ffi::CASS_ITERATOR_TYPE_SCHEMA_META_FIELD'>CASS_ITERATOR_TYPE_SCHEMA_META_FIELD</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_CRITICAL.html'
+                               title='cql_ffi::CASS_LOG_CRITICAL'>CASS_LOG_CRITICAL</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_DEBUG.html'
+                               title='cql_ffi::CASS_LOG_DEBUG'>CASS_LOG_DEBUG</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_DISABLED.html'
+                               title='cql_ffi::CASS_LOG_DISABLED'>CASS_LOG_DISABLED</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_ERROR.html'
+                               title='cql_ffi::CASS_LOG_ERROR'>CASS_LOG_ERROR</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_INFO.html'
+                               title='cql_ffi::CASS_LOG_INFO'>CASS_LOG_INFO</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_LAST_ENTRY.html'
+                               title='cql_ffi::CASS_LOG_LAST_ENTRY'>CASS_LOG_LAST_ENTRY</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_TRACE.html'
+                               title='cql_ffi::CASS_LOG_TRACE'>CASS_LOG_TRACE</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_LOG_WARN.html'
+                               title='cql_ffi::CASS_LOG_WARN'>CASS_LOG_WARN</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_SSL_VERIFY_NONE.html'
+                               title='cql_ffi::CASS_SSL_VERIFY_NONE'>CASS_SSL_VERIFY_NONE</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_SSL_VERIFY_PEER_CERT.html'
+                               title='cql_ffi::CASS_SSL_VERIFY_PEER_CERT'>CASS_SSL_VERIFY_PEER_CERT</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CASS_SSL_VERIFY_PEER_IDENTITY.html'
+                               title='cql_ffi::CASS_SSL_VERIFY_PEER_IDENTITY'>CASS_SSL_VERIFY_PEER_IDENTITY</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.cass_false.html'
+                               title='cql_ffi::cass_false'>cass_false</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.cass_true.html'
+                               title='cql_ffi::cass_true'>cass_true</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_batch_add_statement.html'
+                               title='cql_ffi::cass_batch_add_statement'>cass_batch_add_statement</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_batch_free.html'
+                               title='cql_ffi::cass_batch_free'>cass_batch_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_batch_new.html'
+                               title='cql_ffi::cass_batch_new'>cass_batch_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_batch_set_consistency.html'
+                               title='cql_ffi::cass_batch_set_consistency'>cass_batch_set_consistency</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_bytes_init.html'
+                               title='cql_ffi::cass_bytes_init'>cass_bytes_init</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_free.html'
+                               title='cql_ffi::cass_cluster_free'>cass_cluster_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_new.html'
+                               title='cql_ffi::cass_cluster_new'>cass_cluster_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_connect_timeout.html'
+                               title='cql_ffi::cass_cluster_set_connect_timeout'>cass_cluster_set_connect_timeout</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_contact_points.html'
+                               title='cql_ffi::cass_cluster_set_contact_points'>cass_cluster_set_contact_points</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_core_connections_per_host.html'
+                               title='cql_ffi::cass_cluster_set_core_connections_per_host'>cass_cluster_set_core_connections_per_host</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_credentials.html'
+                               title='cql_ffi::cass_cluster_set_credentials'>cass_cluster_set_credentials</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_load_balance_dc_aware.html'
+                               title='cql_ffi::cass_cluster_set_load_balance_dc_aware'>cass_cluster_set_load_balance_dc_aware</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_load_balance_round_robin.html'
+                               title='cql_ffi::cass_cluster_set_load_balance_round_robin'>cass_cluster_set_load_balance_round_robin</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_max_concurrent_creation.html'
+                               title='cql_ffi::cass_cluster_set_max_concurrent_creation'>cass_cluster_set_max_concurrent_creation</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_max_concurrent_requests_threshold.html'
+                               title='cql_ffi::cass_cluster_set_max_concurrent_requests_threshold'>cass_cluster_set_max_concurrent_requests_threshold</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_max_connections_per_host.html'
+                               title='cql_ffi::cass_cluster_set_max_connections_per_host'>cass_cluster_set_max_connections_per_host</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_max_requests_per_flush.html'
+                               title='cql_ffi::cass_cluster_set_max_requests_per_flush'>cass_cluster_set_max_requests_per_flush</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_num_threads_io.html'
+                               title='cql_ffi::cass_cluster_set_num_threads_io'>cass_cluster_set_num_threads_io</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_pending_requests_high_water_mark.html'
+                               title='cql_ffi::cass_cluster_set_pending_requests_high_water_mark'>cass_cluster_set_pending_requests_high_water_mark</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_pending_requests_low_water_mark.html'
+                               title='cql_ffi::cass_cluster_set_pending_requests_low_water_mark'>cass_cluster_set_pending_requests_low_water_mark</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_port.html'
+                               title='cql_ffi::cass_cluster_set_port'>cass_cluster_set_port</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_protocol_version.html'
+                               title='cql_ffi::cass_cluster_set_protocol_version'>cass_cluster_set_protocol_version</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_queue_size_event.html'
+                               title='cql_ffi::cass_cluster_set_queue_size_event'>cass_cluster_set_queue_size_event</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_queue_size_io.html'
+                               title='cql_ffi::cass_cluster_set_queue_size_io'>cass_cluster_set_queue_size_io</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_queue_size_log.html'
+                               title='cql_ffi::cass_cluster_set_queue_size_log'>cass_cluster_set_queue_size_log</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_reconnect_wait_time.html'
+                               title='cql_ffi::cass_cluster_set_reconnect_wait_time'>cass_cluster_set_reconnect_wait_time</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_request_timeout.html'
+                               title='cql_ffi::cass_cluster_set_request_timeout'>cass_cluster_set_request_timeout</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_ssl.html'
+                               title='cql_ffi::cass_cluster_set_ssl'>cass_cluster_set_ssl</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_tcp_keepalive.html'
+                               title='cql_ffi::cass_cluster_set_tcp_keepalive'>cass_cluster_set_tcp_keepalive</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_tcp_nodelay.html'
+                               title='cql_ffi::cass_cluster_set_tcp_nodelay'>cass_cluster_set_tcp_nodelay</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_token_aware_routing.html'
+                               title='cql_ffi::cass_cluster_set_token_aware_routing'>cass_cluster_set_token_aware_routing</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_write_bytes_high_water_mark.html'
+                               title='cql_ffi::cass_cluster_set_write_bytes_high_water_mark'>cass_cluster_set_write_bytes_high_water_mark</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_cluster_set_write_bytes_low_water_mark.html'
+                               title='cql_ffi::cass_cluster_set_write_bytes_low_water_mark'>cass_cluster_set_write_bytes_low_water_mark</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_bool.html'
+                               title='cql_ffi::cass_collection_append_bool'>cass_collection_append_bool</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_bytes.html'
+                               title='cql_ffi::cass_collection_append_bytes'>cass_collection_append_bytes</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_decimal.html'
+                               title='cql_ffi::cass_collection_append_decimal'>cass_collection_append_decimal</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_double.html'
+                               title='cql_ffi::cass_collection_append_double'>cass_collection_append_double</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_float.html'
+                               title='cql_ffi::cass_collection_append_float'>cass_collection_append_float</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_inet.html'
+                               title='cql_ffi::cass_collection_append_inet'>cass_collection_append_inet</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_int32.html'
+                               title='cql_ffi::cass_collection_append_int32'>cass_collection_append_int32</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_int64.html'
+                               title='cql_ffi::cass_collection_append_int64'>cass_collection_append_int64</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_string.html'
+                               title='cql_ffi::cass_collection_append_string'>cass_collection_append_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_append_uuid.html'
+                               title='cql_ffi::cass_collection_append_uuid'>cass_collection_append_uuid</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_free.html'
+                               title='cql_ffi::cass_collection_free'>cass_collection_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_collection_new.html'
+                               title='cql_ffi::cass_collection_new'>cass_collection_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_decimal_init.html'
+                               title='cql_ffi::cass_decimal_init'>cass_decimal_init</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_error_desc.html'
+                               title='cql_ffi::cass_error_desc'>cass_error_desc</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_error_code.html'
+                               title='cql_ffi::cass_future_error_code'>cass_future_error_code</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_error_message.html'
+                               title='cql_ffi::cass_future_error_message'>cass_future_error_message</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_free.html'
+                               title='cql_ffi::cass_future_free'>cass_future_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_get_prepared.html'
+                               title='cql_ffi::cass_future_get_prepared'>cass_future_get_prepared</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_get_result.html'
+                               title='cql_ffi::cass_future_get_result'>cass_future_get_result</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_ready.html'
+                               title='cql_ffi::cass_future_ready'>cass_future_ready</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_set_callback.html'
+                               title='cql_ffi::cass_future_set_callback'>cass_future_set_callback</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_wait.html'
+                               title='cql_ffi::cass_future_wait'>cass_future_wait</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_future_wait_timed.html'
+                               title='cql_ffi::cass_future_wait_timed'>cass_future_wait_timed</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_inet_init_v4.html'
+                               title='cql_ffi::cass_inet_init_v4'>cass_inet_init_v4</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_inet_init_v6.html'
+                               title='cql_ffi::cass_inet_init_v6'>cass_inet_init_v6</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_fields_from_schema_meta.html'
+                               title='cql_ffi::cass_iterator_fields_from_schema_meta'>cass_iterator_fields_from_schema_meta</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_free.html'
+                               title='cql_ffi::cass_iterator_free'>cass_iterator_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_from_collection.html'
+                               title='cql_ffi::cass_iterator_from_collection'>cass_iterator_from_collection</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_from_map.html'
+                               title='cql_ffi::cass_iterator_from_map'>cass_iterator_from_map</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_from_result.html'
+                               title='cql_ffi::cass_iterator_from_result'>cass_iterator_from_result</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_from_row.html'
+                               title='cql_ffi::cass_iterator_from_row'>cass_iterator_from_row</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_from_schema.html'
+                               title='cql_ffi::cass_iterator_from_schema'>cass_iterator_from_schema</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_from_schema_meta.html'
+                               title='cql_ffi::cass_iterator_from_schema_meta'>cass_iterator_from_schema_meta</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_column.html'
+                               title='cql_ffi::cass_iterator_get_column'>cass_iterator_get_column</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_map_key.html'
+                               title='cql_ffi::cass_iterator_get_map_key'>cass_iterator_get_map_key</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_map_value.html'
+                               title='cql_ffi::cass_iterator_get_map_value'>cass_iterator_get_map_value</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_row.html'
+                               title='cql_ffi::cass_iterator_get_row'>cass_iterator_get_row</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_schema_meta.html'
+                               title='cql_ffi::cass_iterator_get_schema_meta'>cass_iterator_get_schema_meta</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_schema_meta_field.html'
+                               title='cql_ffi::cass_iterator_get_schema_meta_field'>cass_iterator_get_schema_meta_field</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_get_value.html'
+                               title='cql_ffi::cass_iterator_get_value'>cass_iterator_get_value</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_next.html'
+                               title='cql_ffi::cass_iterator_next'>cass_iterator_next</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_iterator_type.html'
+                               title='cql_ffi::cass_iterator_type'>cass_iterator_type</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_log_cleanup.html'
+                               title='cql_ffi::cass_log_cleanup'>cass_log_cleanup</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_log_level_string.html'
+                               title='cql_ffi::cass_log_level_string'>cass_log_level_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_log_set_callback.html'
+                               title='cql_ffi::cass_log_set_callback'>cass_log_set_callback</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_log_set_level.html'
+                               title='cql_ffi::cass_log_set_level'>cass_log_set_level</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_log_set_queue_size.html'
+                               title='cql_ffi::cass_log_set_queue_size'>cass_log_set_queue_size</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_prepared_bind.html'
+                               title='cql_ffi::cass_prepared_bind'>cass_prepared_bind</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_prepared_free.html'
+                               title='cql_ffi::cass_prepared_free'>cass_prepared_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_column_count.html'
+                               title='cql_ffi::cass_result_column_count'>cass_result_column_count</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_column_name.html'
+                               title='cql_ffi::cass_result_column_name'>cass_result_column_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_column_type.html'
+                               title='cql_ffi::cass_result_column_type'>cass_result_column_type</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_first_row.html'
+                               title='cql_ffi::cass_result_first_row'>cass_result_first_row</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_free.html'
+                               title='cql_ffi::cass_result_free'>cass_result_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_has_more_pages.html'
+                               title='cql_ffi::cass_result_has_more_pages'>cass_result_has_more_pages</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_result_row_count.html'
+                               title='cql_ffi::cass_result_row_count'>cass_result_row_count</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_row_get_column.html'
+                               title='cql_ffi::cass_row_get_column'>cass_row_get_column</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_row_get_column_by_name.html'
+                               title='cql_ffi::cass_row_get_column_by_name'>cass_row_get_column_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_free.html'
+                               title='cql_ffi::cass_schema_free'>cass_schema_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_get_keyspace.html'
+                               title='cql_ffi::cass_schema_get_keyspace'>cass_schema_get_keyspace</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_meta_field_name.html'
+                               title='cql_ffi::cass_schema_meta_field_name'>cass_schema_meta_field_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_meta_field_value.html'
+                               title='cql_ffi::cass_schema_meta_field_value'>cass_schema_meta_field_value</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_meta_get_entry.html'
+                               title='cql_ffi::cass_schema_meta_get_entry'>cass_schema_meta_get_entry</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_meta_get_field.html'
+                               title='cql_ffi::cass_schema_meta_get_field'>cass_schema_meta_get_field</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_schema_meta_type.html'
+                               title='cql_ffi::cass_schema_meta_type'>cass_schema_meta_type</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_close.html'
+                               title='cql_ffi::cass_session_close'>cass_session_close</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_connect.html'
+                               title='cql_ffi::cass_session_connect'>cass_session_connect</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_connect_keyspace.html'
+                               title='cql_ffi::cass_session_connect_keyspace'>cass_session_connect_keyspace</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_execute.html'
+                               title='cql_ffi::cass_session_execute'>cass_session_execute</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_execute_batch.html'
+                               title='cql_ffi::cass_session_execute_batch'>cass_session_execute_batch</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_free.html'
+                               title='cql_ffi::cass_session_free'>cass_session_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_get_schema.html'
+                               title='cql_ffi::cass_session_get_schema'>cass_session_get_schema</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_new.html'
+                               title='cql_ffi::cass_session_new'>cass_session_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_session_prepare.html'
+                               title='cql_ffi::cass_session_prepare'>cass_session_prepare</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_ssl_add_trusted_cert.html'
+                               title='cql_ffi::cass_ssl_add_trusted_cert'>cass_ssl_add_trusted_cert</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_ssl_free.html'
+                               title='cql_ffi::cass_ssl_free'>cass_ssl_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_ssl_new.html'
+                               title='cql_ffi::cass_ssl_new'>cass_ssl_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_ssl_set_cert.html'
+                               title='cql_ffi::cass_ssl_set_cert'>cass_ssl_set_cert</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_ssl_set_private_key.html'
+                               title='cql_ffi::cass_ssl_set_private_key'>cass_ssl_set_private_key</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_ssl_set_verify_flags.html'
+                               title='cql_ffi::cass_ssl_set_verify_flags'>cass_ssl_set_verify_flags</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_add_key_index.html'
+                               title='cql_ffi::cass_statement_add_key_index'>cass_statement_add_key_index</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_bool.html'
+                               title='cql_ffi::cass_statement_bind_bool'>cass_statement_bind_bool</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_bool_by_name.html'
+                               title='cql_ffi::cass_statement_bind_bool_by_name'>cass_statement_bind_bool_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_bytes.html'
+                               title='cql_ffi::cass_statement_bind_bytes'>cass_statement_bind_bytes</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_bytes_by_name.html'
+                               title='cql_ffi::cass_statement_bind_bytes_by_name'>cass_statement_bind_bytes_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_collection.html'
+                               title='cql_ffi::cass_statement_bind_collection'>cass_statement_bind_collection</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_collection_by_name.html'
+                               title='cql_ffi::cass_statement_bind_collection_by_name'>cass_statement_bind_collection_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_custom.html'
+                               title='cql_ffi::cass_statement_bind_custom'>cass_statement_bind_custom</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_custom_by_name.html'
+                               title='cql_ffi::cass_statement_bind_custom_by_name'>cass_statement_bind_custom_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_decimal.html'
+                               title='cql_ffi::cass_statement_bind_decimal'>cass_statement_bind_decimal</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_decimal_by_name.html'
+                               title='cql_ffi::cass_statement_bind_decimal_by_name'>cass_statement_bind_decimal_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_double.html'
+                               title='cql_ffi::cass_statement_bind_double'>cass_statement_bind_double</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_double_by_name.html'
+                               title='cql_ffi::cass_statement_bind_double_by_name'>cass_statement_bind_double_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_float.html'
+                               title='cql_ffi::cass_statement_bind_float'>cass_statement_bind_float</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_float_by_name.html'
+                               title='cql_ffi::cass_statement_bind_float_by_name'>cass_statement_bind_float_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_inet.html'
+                               title='cql_ffi::cass_statement_bind_inet'>cass_statement_bind_inet</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_inet_by_name.html'
+                               title='cql_ffi::cass_statement_bind_inet_by_name'>cass_statement_bind_inet_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_int32.html'
+                               title='cql_ffi::cass_statement_bind_int32'>cass_statement_bind_int32</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_int32_by_name.html'
+                               title='cql_ffi::cass_statement_bind_int32_by_name'>cass_statement_bind_int32_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_int64.html'
+                               title='cql_ffi::cass_statement_bind_int64'>cass_statement_bind_int64</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_int64_by_name.html'
+                               title='cql_ffi::cass_statement_bind_int64_by_name'>cass_statement_bind_int64_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_null.html'
+                               title='cql_ffi::cass_statement_bind_null'>cass_statement_bind_null</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_string.html'
+                               title='cql_ffi::cass_statement_bind_string'>cass_statement_bind_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_string_by_name.html'
+                               title='cql_ffi::cass_statement_bind_string_by_name'>cass_statement_bind_string_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_uuid.html'
+                               title='cql_ffi::cass_statement_bind_uuid'>cass_statement_bind_uuid</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_bind_uuid_by_name.html'
+                               title='cql_ffi::cass_statement_bind_uuid_by_name'>cass_statement_bind_uuid_by_name</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_free.html'
+                               title='cql_ffi::cass_statement_free'>cass_statement_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_new.html'
+                               title='cql_ffi::cass_statement_new'>cass_statement_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_set_consistency.html'
+                               title='cql_ffi::cass_statement_set_consistency'>cass_statement_set_consistency</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_set_keyspace.html'
+                               title='cql_ffi::cass_statement_set_keyspace'>cass_statement_set_keyspace</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_set_paging_size.html'
+                               title='cql_ffi::cass_statement_set_paging_size'>cass_statement_set_paging_size</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_set_paging_state.html'
+                               title='cql_ffi::cass_statement_set_paging_state'>cass_statement_set_paging_state</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_statement_set_serial_consistency.html'
+                               title='cql_ffi::cass_statement_set_serial_consistency'>cass_statement_set_serial_consistency</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_string_init.html'
+                               title='cql_ffi::cass_string_init'>cass_string_init</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_string_init2.html'
+                               title='cql_ffi::cass_string_init2'>cass_string_init2</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_from_string.html'
+                               title='cql_ffi::cass_uuid_from_string'>cass_uuid_from_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_gen_free.html'
+                               title='cql_ffi::cass_uuid_gen_free'>cass_uuid_gen_free</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_gen_from_time.html'
+                               title='cql_ffi::cass_uuid_gen_from_time'>cass_uuid_gen_from_time</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_gen_new.html'
+                               title='cql_ffi::cass_uuid_gen_new'>cass_uuid_gen_new</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_gen_new_with_node.html'
+                               title='cql_ffi::cass_uuid_gen_new_with_node'>cass_uuid_gen_new_with_node</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_gen_random.html'
+                               title='cql_ffi::cass_uuid_gen_random'>cass_uuid_gen_random</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_gen_time.html'
+                               title='cql_ffi::cass_uuid_gen_time'>cass_uuid_gen_time</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_max_from_time.html'
+                               title='cql_ffi::cass_uuid_max_from_time'>cass_uuid_max_from_time</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_min_from_time.html'
+                               title='cql_ffi::cass_uuid_min_from_time'>cass_uuid_min_from_time</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_string.html'
+                               title='cql_ffi::cass_uuid_string'>cass_uuid_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_timestamp.html'
+                               title='cql_ffi::cass_uuid_timestamp'>cass_uuid_timestamp</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_uuid_version.html'
+                               title='cql_ffi::cass_uuid_version'>cass_uuid_version</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_bool.html'
+                               title='cql_ffi::cass_value_get_bool'>cass_value_get_bool</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_bytes.html'
+                               title='cql_ffi::cass_value_get_bytes'>cass_value_get_bytes</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_decimal.html'
+                               title='cql_ffi::cass_value_get_decimal'>cass_value_get_decimal</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_double.html'
+                               title='cql_ffi::cass_value_get_double'>cass_value_get_double</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_float.html'
+                               title='cql_ffi::cass_value_get_float'>cass_value_get_float</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_inet.html'
+                               title='cql_ffi::cass_value_get_inet'>cass_value_get_inet</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_int32.html'
+                               title='cql_ffi::cass_value_get_int32'>cass_value_get_int32</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_int64.html'
+                               title='cql_ffi::cass_value_get_int64'>cass_value_get_int64</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_string.html'
+                               title='cql_ffi::cass_value_get_string'>cass_value_get_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_get_uuid.html'
+                               title='cql_ffi::cass_value_get_uuid'>cass_value_get_uuid</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_is_collection.html'
+                               title='cql_ffi::cass_value_is_collection'>cass_value_is_collection</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_is_null.html'
+                               title='cql_ffi::cass_value_is_null'>cass_value_is_null</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_item_count.html'
+                               title='cql_ffi::cass_value_item_count'>cass_value_item_count</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_primary_sub_type.html'
+                               title='cql_ffi::cass_value_primary_sub_type'>cass_value_primary_sub_type</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_secondary_sub_type.html'
+                               title='cql_ffi::cass_value_secondary_sub_type'>cass_value_secondary_sub_type</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cass_value_type.html'
+                               title='cql_ffi::cass_value_type'>cass_value_type</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cassuuid2string.html'
+                               title='cql_ffi::cassuuid2string'>cassuuid2string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cassvalue2cassstring.html'
+                               title='cql_ffi::cassvalue2cassstring'>cassvalue2cassstring</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.cassvalue2cassuuid.html'
+                               title='cql_ffi::cassvalue2cassuuid'>cassvalue2cassuuid</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.gencassuuid.html'
+                               title='cql_ffi::gencassuuid'>gencassuuid</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.str2cass_string.html'
+                               title='cql_ffi::str2cass_string'>str2cass_string</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.str2ref.html'
+                               title='cql_ffi::str2ref'>str2ref</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassBatch.html'
+                               title='cql_ffi::CassBatch'>CassBatch</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassBatchType.html'
+                               title='cql_ffi::CassBatchType'>CassBatchType</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassBytes.html'
+                               title='cql_ffi::CassBytes'>CassBytes</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassCluster.html'
+                               title='cql_ffi::CassCluster'>CassCluster</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassCollection.html'
+                               title='cql_ffi::CassCollection'>CassCollection</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassCollectionType.html'
+                               title='cql_ffi::CassCollectionType'>CassCollectionType</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassConsistency.html'
+                               title='cql_ffi::CassConsistency'>CassConsistency</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassDecimal.html'
+                               title='cql_ffi::CassDecimal'>CassDecimal</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassErrorSource.html'
+                               title='cql_ffi::CassErrorSource'>CassErrorSource</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassFuture.html'
+                               title='cql_ffi::CassFuture'>CassFuture</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassFutureCallback.html'
+                               title='cql_ffi::CassFutureCallback'>CassFutureCallback</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassInet.html'
+                               title='cql_ffi::CassInet'>CassInet</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassIterator.html'
+                               title='cql_ffi::CassIterator'>CassIterator</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassIteratorType.html'
+                               title='cql_ffi::CassIteratorType'>CassIteratorType</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassLogCallback.html'
+                               title='cql_ffi::CassLogCallback'>CassLogCallback</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassLogLevel.html'
+                               title='cql_ffi::CassLogLevel'>CassLogLevel</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassLogMessage.html'
+                               title='cql_ffi::CassLogMessage'>CassLogMessage</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassPrepared.html'
+                               title='cql_ffi::CassPrepared'>CassPrepared</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassResult.html'
+                               title='cql_ffi::CassResult'>CassResult</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassRow.html'
+                               title='cql_ffi::CassRow'>CassRow</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassSchema.html'
+                               title='cql_ffi::CassSchema'>CassSchema</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassSchemaMeta.html'
+                               title='cql_ffi::CassSchemaMeta'>CassSchemaMeta</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassSchemaMetaField.html'
+                               title='cql_ffi::CassSchemaMetaField'>CassSchemaMetaField</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassSession.html'
+                               title='cql_ffi::CassSession'>CassSession</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassSsl.html'
+                               title='cql_ffi::CassSsl'>CassSsl</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassSslVerifyFlags.html'
+                               title='cql_ffi::CassSslVerifyFlags'>CassSslVerifyFlags</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassStatement.html'
+                               title='cql_ffi::CassStatement'>CassStatement</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassString.html'
+                               title='cql_ffi::CassString'>CassString</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassUuid.html'
+                               title='cql_ffi::CassUuid'>CassUuid</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.CassUuidGen.html'
+                               title='cql_ffi::CassUuidGen'>CassUuidGen</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassBatchType_.html'
+                               title='cql_ffi::Enum_CassBatchType_'>Enum_CassBatchType_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassCollectionType_.html'
+                               title='cql_ffi::Enum_CassCollectionType_'>Enum_CassCollectionType_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassConsistency_.html'
+                               title='cql_ffi::Enum_CassConsistency_'>Enum_CassConsistency_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassErrorSource_.html'
+                               title='cql_ffi::Enum_CassErrorSource_'>Enum_CassErrorSource_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassIteratorType_.html'
+                               title='cql_ffi::Enum_CassIteratorType_'>Enum_CassIteratorType_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassLogLevel_.html'
+                               title='cql_ffi::Enum_CassLogLevel_'>Enum_CassLogLevel_</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_CassSslVerifyFlags.html'
+                               title='cql_ffi::Enum_CassSslVerifyFlags'>Enum_CassSslVerifyFlags</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Enum_Unnamed1.html'
+                               title='cql_ffi::Enum_Unnamed1'>Enum_Unnamed1</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_bool_t.html'
+                               title='cql_ffi::cass_bool_t'>cass_bool_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_byte_t.html'
+                               title='cql_ffi::cass_byte_t'>cass_byte_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_double_t.html'
+                               title='cql_ffi::cass_double_t'>cass_double_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_duration_t.html'
+                               title='cql_ffi::cass_duration_t'>cass_duration_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_float_t.html'
+                               title='cql_ffi::cass_float_t'>cass_float_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_int16_t.html'
+                               title='cql_ffi::cass_int16_t'>cass_int16_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_int32_t.html'
+                               title='cql_ffi::cass_int32_t'>cass_int32_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_int64_t.html'
+                               title='cql_ffi::cass_int64_t'>cass_int64_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_int8_t.html'
+                               title='cql_ffi::cass_int8_t'>cass_int8_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_size_t.html'
+                               title='cql_ffi::cass_size_t'>cass_size_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_uint16_t.html'
+                               title='cql_ffi::cass_uint16_t'>cass_uint16_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_uint32_t.html'
+                               title='cql_ffi::cass_uint32_t'>cass_uint32_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_uint64_t.html'
+                               title='cql_ffi::cass_uint64_t'>cass_uint64_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.cass_uint8_t.html'
+                               title='cql_ffi::cass_uint8_t'>cass_uint8_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.ptrdiff_t.html'
+                               title='cql_ffi::ptrdiff_t'>ptrdiff_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.size_t.html'
+                               title='cql_ffi::size_t'>size_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.wchar_t.html'
+                               title='cql_ffi::wchar_t'>wchar_t</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "cql_ffi";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Source to the Rust file `src/cass_error.rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang">
+
+    <title>cass_error.rs.html -- source</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
+<span id="2"> 2</span>
+<span id="3"> 3</span>
+<span id="4"> 4</span>
+<span id="5"> 5</span>
+<span id="6"> 6</span>
+<span id="7"> 7</span>
+<span id="8"> 8</span>
+<span id="9"> 9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+</pre><pre class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>non_camel_case_types</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
+
+<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>types</span>::<span class='ident'>os</span>::<span class='ident'>arch</span>::<span class='ident'>c95</span>::<span class='ident'>c_uint</span>;
+<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>types</span>::<span class='ident'>os</span>::<span class='ident'>arch</span>::<span class='ident'>c95</span>::<span class='ident'>c_char</span>;
+
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Enum_CassErrorSource_</span> <span class='op'>=</span> <span class='ident'>c_uint</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>CASS_ERROR_SOURCE_NONE</span>: <span class='ident'>c_uint</span> <span class='op'>=</span> <span class='number'>0</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>CASS_ERROR_SOURCE_LIB</span>: <span class='ident'>c_uint</span> <span class='op'>=</span> <span class='number'>1</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>CASS_ERROR_SOURCE_SERVER</span>: <span class='ident'>c_uint</span> <span class='op'>=</span> <span class='number'>2</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>CASS_ERROR_SOURCE_SSL</span>: <span class='ident'>c_uint</span> <span class='op'>=</span> <span class='number'>3</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>CASS_ERROR_SOURCE_COMPRESSION</span>: <span class='ident'>c_uint</span> <span class='op'>=</span> <span class='number'>4</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>CassErrorSource</span> <span class='op'>=</span> <span class='ident'>Enum_CassErrorSource_</span>;
+
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Show</span>,<span class='ident'>Eq</span>,<span class='ident'>PartialEq</span>,<span class='ident'>Copy</span>)]</span>
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>CassError</span> {
+    <span class='ident'>CASS_OK</span> <span class='op'>=</span> <span class='number'>0</span>,
+    <span class='ident'>LIB_BAD_PARAMS</span> <span class='op'>=</span> <span class='number'>16777217</span>,
+    <span class='ident'>LIB_NO_STREAMS</span> <span class='op'>=</span> <span class='number'>16777218</span>,
+    <span class='ident'>LIB_UNABLE_TO_INIT</span> <span class='op'>=</span> <span class='number'>16777219</span>,
+    <span class='ident'>LIB_MESSAGE_ENCODE</span> <span class='op'>=</span> <span class='number'>16777220</span>,
+    <span class='ident'>LIB_HOST_RESOLUTION</span> <span class='op'>=</span> <span class='number'>16777221</span>,
+    <span class='ident'>LIB_UNEXPECTED_RESPONSE</span> <span class='op'>=</span> <span class='number'>16777222</span>,
+    <span class='ident'>LIB_REQUEST_QUEUE_FULL</span> <span class='op'>=</span> <span class='number'>16777223</span>,
+    <span class='ident'>LIB_NO_AVAILABLE_IO_THREAD</span> <span class='op'>=</span> <span class='number'>16777224</span>,
+    <span class='ident'>LIB_WRITE_ERROR</span> <span class='op'>=</span> <span class='number'>16777225</span>,
+    <span class='ident'>LIB_NO_HOSTS_AVAILABLE</span> <span class='op'>=</span> <span class='number'>16777226</span>,
+    <span class='ident'>LIB_INDEX_OUT_OF_BOUNDS</span> <span class='op'>=</span> <span class='number'>16777227</span>,
+    <span class='ident'>LIB_INVALID_ITEM_COUNT</span> <span class='op'>=</span> <span class='number'>16777228</span>,
+    <span class='ident'>LIB_INVALID_VALUE_TYPE</span> <span class='op'>=</span> <span class='number'>16777229</span>,
+    <span class='ident'>LIB_REQUEST_TIMED_OUT</span> <span class='op'>=</span> <span class='number'>16777230</span>,
+    <span class='ident'>LIB_UNABLE_TO_SET_KEYSPACE</span> <span class='op'>=</span> <span class='number'>16777231</span>,
+    <span class='ident'>LIB_CALLBACK_ALREADY_SET</span> <span class='op'>=</span> <span class='number'>16777232</span>,
+    <span class='ident'>LIB_INVALID_STATEMENT_TYPE</span> <span class='op'>=</span> <span class='number'>16777233</span>,
+    <span class='ident'>LIB_NAME_DOES_NOT_EXIST</span> <span class='op'>=</span> <span class='number'>16777234</span>,
+    <span class='ident'>LIB_UNABLE_TO_DETERMINE_PROTOCOL</span> <span class='op'>=</span> <span class='number'>16777235</span>,
+    <span class='ident'>LIB_NULL_VALUE</span> <span class='op'>=</span> <span class='number'>16777236</span>,
+    <span class='ident'>LIB_NOT_IMPLEMENTED</span> <span class='op'>=</span> <span class='number'>16777237</span>,
+    <span class='ident'>LIB_UNABLE_TO_CONNECT</span> <span class='op'>=</span> <span class='number'>16777238</span>,
+    <span class='ident'>LIB_UNABLE_TO_CLOSE</span> <span class='op'>=</span> <span class='number'>16777239</span>,
+    <span class='ident'>SERVER_SERVER_ERROR</span> <span class='op'>=</span> <span class='number'>33554432</span>,
+    <span class='ident'>SERVER_PROTOCOL_ERROR</span> <span class='op'>=</span> <span class='number'>33554442</span>,
+    <span class='ident'>SERVER_BAD_CREDENTIALS</span> <span class='op'>=</span> <span class='number'>33554688</span>,
+    <span class='ident'>SERVER_UNAVAILABLE</span> <span class='op'>=</span> <span class='number'>33558528</span>,
+    <span class='ident'>SERVER_OVERLOADED</span> <span class='op'>=</span> <span class='number'>33558529</span>,
+    <span class='ident'>SERVER_IS_BOOTSTRAPPING</span> <span class='op'>=</span> <span class='number'>33558530</span>,
+    <span class='ident'>SERVER_TRUNCATE_ERROR</span> <span class='op'>=</span> <span class='number'>33558531</span>,
+    <span class='ident'>SERVER_WRITE_TIMEOUT</span> <span class='op'>=</span> <span class='number'>33558784</span>,
+    <span class='ident'>SERVER_READ_TIMEOUT</span> <span class='op'>=</span> <span class='number'>33559040</span>,
+    <span class='ident'>SERVER_SYNTAX_ERROR</span> <span class='op'>=</span> <span class='number'>33562624</span>,
+    <span class='ident'>SERVER_UNAUTHORIZED</span> <span class='op'>=</span> <span class='number'>33562880</span>,
+    <span class='ident'>SERVER_INVALID_QUERY</span> <span class='op'>=</span> <span class='number'>33563136</span>,
+    <span class='ident'>SERVER_CONFIG_ERROR</span> <span class='op'>=</span> <span class='number'>33563392</span>,
+    <span class='ident'>SERVER_ALREADY_EXISTS</span> <span class='op'>=</span> <span class='number'>33563648</span>,
+    <span class='ident'>SERVER_UNPREPARED</span> <span class='op'>=</span> <span class='number'>33563904</span>,
+    <span class='ident'>SSL_INVALID_CERT</span> <span class='op'>=</span> <span class='number'>50331649</span>,
+    <span class='ident'>SSL_INVALID_PRIVATE_KEY</span> <span class='op'>=</span> <span class='number'>50331650</span>,
+    <span class='ident'>SSL_NO_PEER_CERT</span> <span class='op'>=</span> <span class='number'>50331651</span>,
+    <span class='ident'>SSL_INVALID_PEER_CERT</span> <span class='op'>=</span> <span class='number'>50331652</span>,
+    <span class='ident'>SSL_IDENTITY_MISMATCH</span> <span class='op'>=</span> <span class='number'>50331653</span>,
+    <span class='ident'>LAST_ENTRY</span> <span class='op'>=</span> <span class='number'>50331654</span>
+}
+
+
+<span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>cass_error_desc</span>(<span class='ident'>error</span>: <span class='ident'>CassError</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
+}
+</pre>
+</section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "cql_ffi";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

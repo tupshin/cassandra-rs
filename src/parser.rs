@@ -66,6 +66,8 @@ fn test_select_where() {
     assert!(cql::cql_statement("select * from tab where term > ?").is_ok());
     assert!(cql::cql_statement("select * from tab
                                 where term > ?").is_ok());
+    assert!(cql::cql_statement("select * from tab
+                                where term > ? and x = ?").is_ok());
 }
 
 #[test]

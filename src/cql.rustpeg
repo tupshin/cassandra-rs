@@ -22,10 +22,11 @@ where_clauses = where predicates
 predicates = predicate ++ and
 
 #[pub]
-predicate = field op
+predicate = field op placeholder
 
 op = '=' / '<' / '>' / '<=' / '>=' / "contains"i / "contains key"i
 
+placeholder = __ "?" __
 and = __ "and"i __
 from = __ "from"i __
 where = __ "where"i  __

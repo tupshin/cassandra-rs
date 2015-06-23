@@ -44,5 +44,5 @@ fn test_fields() {
 
 #[test]
 fn test_where_clause() {
-    assert!(cql::predicate("term > 30").is_ok());
+    assert!(cql::predicate("term > ?").is_ok());
 }

@@ -1,0 +1,7 @@
+use cql::*;
+
+cql_statement -> ParsedCqlStatement
+    = select_statement
+
+select_statement -> ParsedCqlStatement
+    = "select" { ParsedCqlStatement::Select }

@@ -5,7 +5,7 @@ cql_statement -> ParsedCqlStatement
     = select_statement / insert_statement / delete_statement / update_statement
 
 select_statement -> ParsedCqlStatement
-    = select fields from table where_clauses? limit_clause? { ParsedCqlStatement::Select }
+    = select fields from table where_clauses? order_by_clause? limit_clause? { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
     = "insert" { ParsedCqlStatement::Insert }
@@ -33,6 +33,8 @@ where = __ "where"i  __
 star = __ "*" __
 select = __ "select"i __
 field = __ [a-zA-Z0-9]+ __
+
+order_by_clause = "order" "by" field
 
 #[pub]
 fields = (field ++ ",") / star

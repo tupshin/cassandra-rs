@@ -13,10 +13,10 @@ insert_statement -> ParsedCqlStatement
     { ParsedCqlStatement::Insert }
 
 delete_statement -> ParsedCqlStatement
-    = "insert" { ParsedCqlStatement::Delete }
+    = "delete"i { ParsedCqlStatement::Delete }
 
 update_statement -> ParsedCqlStatement
-    = "insert" { ParsedCqlStatement::Update }
+    = "update"i { ParsedCqlStatement::Update }
 
 #[pub]
 where_clauses = where predicates

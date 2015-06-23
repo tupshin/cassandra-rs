@@ -46,3 +46,21 @@ fn test_fields() {
 fn test_where_clause() {
     assert!(cql::predicate("term > ?").is_ok());
 }
+
+#[test]
+fn test_where() {
+    assert!(cql::where_clauses("where term > ?").is_ok());
+}
+
+#[test]
+fn test_select_with_limit() {
+    assert!(cql::cql_statement("select * from blah
+                                LIMIT 1").is_ok());
+}
+
+#[test]
+fn test_select_where() {
+    assert!(cql::cql_statement("select * from tab where term > ?").is_ok());
+    assert!(cql::cql_statement("select * from tab
+                                where term > ?").is_ok());
+}

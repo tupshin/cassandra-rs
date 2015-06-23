@@ -5,7 +5,7 @@ cql_statement -> ParsedCqlStatement
     = select_statement / insert_statement / delete_statement / update_statement
 
 select_statement -> ParsedCqlStatement
-    = select fields from table where_clauses? { ParsedCqlStatement::Select }
+    = select fields from table where_clauses? limit_clause? { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
     = "insert" { ParsedCqlStatement::Insert }
@@ -39,8 +39,18 @@ fields = (field ++ ",") / star
 
 table = [a-zA-Z]+
 limit = "limit"i
+int = [1-9][0-9]*
 
-__ = whitespace*
+limit_clause = __ limit __ int __
+
+__ = (whitespace / eol)*
 
 whitespace
   = [ \t\u{00A0}\u{FEFF}\u{1680}\u{180E}\u{2000}-\u{200A}\u{202F}\u{205F}\u{3000}] // \v\f removed
+
+eol
+  = "\n"
+  / "\r\n"
+  / "\r"
+  / "\u{2028}"
+  / "\u{2029}"

@@ -78,3 +78,9 @@ fn test_select_order_by() {
                                 where term > ?
                                 order by bacon").is_ok());
 }
+
+#[test]
+fn test_basic_insert() {
+    assert!(cql::cql_statement("insert into blah (name, value)
+                                values (?, ?)").is_ok());
+}

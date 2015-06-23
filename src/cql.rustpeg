@@ -4,7 +4,7 @@ cql_statement -> ParsedCqlStatement
     = select_statement / insert_statement / delete_statement / update_statement
 
 select_statement -> ParsedCqlStatement
-    = "select" __ { ParsedCqlStatement::Select }
+    = "select" __ fields __ from __ table { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
     = "insert" __ { ParsedCqlStatement::Insert }
@@ -20,7 +20,7 @@ where = "where"i
 star = "*"
 
 field = [a-zA-Z]+
-fields = field ++ ","
+fields = (field ++ ",") / star
 table = [a-zA-Z]+
 
 __ = whitespace*

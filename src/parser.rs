@@ -13,5 +13,5 @@ fn verify(stmt: &str) {
 
 #[test]
 fn test_simple_select() {
-    assert!(false);
+    verify("select * from test");
 }

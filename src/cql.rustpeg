@@ -34,9 +34,11 @@ star = __ "*" __
 select = __ "select"i __
 field = __ [a-zA-Z0-9]+ __
 
-order_by_clause = "order" __ "by" __ field
+order_by_clause = "order" __ "by" __ field __ order_direction? {}
 
-order_direction = "asc"i / "desc"i
+asc = "asc"i
+desc = "desc"i
+order_direction = asc / desc
 
 
 #[pub]

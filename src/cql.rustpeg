@@ -5,10 +5,11 @@ cql_statement -> ParsedCqlStatement
     = select_statement / insert_statement / delete_statement / update_statement
 
 select_statement -> ParsedCqlStatement
-    = select fields from table where_clauses? order_by_clause? limit_clause? { ParsedCqlStatement::Select }
+    = select fields_or_star from table where_clauses? order_by_clause? limit_clause? { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
-    = "insert" { ParsedCqlStatement::Insert }
+    = "insert" __ "into" __ table __ "(" ")"
+    { ParsedCqlStatement::Insert }
 
 delete_statement -> ParsedCqlStatement
     = "insert" { ParsedCqlStatement::Delete }
@@ -42,7 +43,8 @@ order_direction = asc / desc
 
 
 #[pub]
-fields = (field ++ ",") / star
+fields = (field ++ ",")
+fields_or_star = fields / star
 
 table = [a-zA-Z]+
 limit = "limit"i

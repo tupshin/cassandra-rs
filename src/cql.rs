@@ -2,5 +2,6 @@
 pub enum ParsedCqlStatement {
     Select,
     Insert,
-    Delete
+    Delete,
+    Update
 }

@@ -1,13 +1,29 @@
 use cql::*;
 
 cql_statement -> ParsedCqlStatement
-    = select_statement
+    = select_statement / insert_statement / delete_statement / update_statement
 
 select_statement -> ParsedCqlStatement
-    = "select" { ParsedCqlStatement::Select }
+    = "select" __ { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
-    = "insert" { ParsedCqlStatement::Insert }
+    = "insert" __ { ParsedCqlStatement::Insert }
 
 delete_statement -> ParsedCqlStatement
     = "insert" { ParsedCqlStatement::Delete }
+
+update_statement -> ParsedCqlStatement
+    = "insert" { ParsedCqlStatement::Update }
+
+from = "from"i
+where = "where"i
+star = "*"
+
+field = [a-zA-Z]+
+fields = field ++ ","
+table = [a-zA-Z]+
+
+__ = whitespace*
+
+whitespace
+  = [ \t\u{00A0}\u{FEFF}\u{1680}\u{180E}\u{2000}-\u{200A}\u{202F}\u{205F}\u{3000}] // \v\f removed

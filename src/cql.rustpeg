@@ -1,5 +1,6 @@
 use cql::*;
 
+#[pub]
 cql_statement -> ParsedCqlStatement
     = select_statement / insert_statement / delete_statement / update_statement
 

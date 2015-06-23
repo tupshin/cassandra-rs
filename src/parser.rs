@@ -3,7 +3,11 @@
 peg_file! cql("cql.rustpeg");
 
 fn parse(stmt: &str) -> Result<i64, &str> {
-    Result::Ok(0)
+    let result = match cql::cql_statement(stmt) {
+        Ok(x) => Ok(x),
+        _ => Err("meh")
+    };
+    result
 }
 
 fn verify(stmt: &str) {
@@ -14,4 +18,11 @@ fn verify(stmt: &str) {
 #[test]
 fn test_simple_select() {
     verify("select * from test");
+    verify("select field1,field2 from test");
+    verify("select field1, field2 from test");
+}
+
+#[test]
+fn test_invalid_selec() {
+    verify("select from");
 }

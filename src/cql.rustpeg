@@ -34,7 +34,10 @@ star = __ "*" __
 select = __ "select"i __
 field = __ [a-zA-Z0-9]+ __
 
-order_by_clause = "order" "by" field
+order_by_clause = "order" __ "by" __ field
+
+order_direction = "asc"i / "desc"i
+
 
 #[pub]
 fields = (field ++ ",") / star

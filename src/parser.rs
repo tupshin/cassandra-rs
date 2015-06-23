@@ -67,3 +67,10 @@ fn test_select_where() {
     assert!(cql::cql_statement("select * from tab
                                 where term > ?").is_ok());
 }
+
+#[test]
+fn test_select_order_by() {
+    assert!(cql::cql_statement("select * from tab
+                                where term > ?
+                                order by bacon").is_ok());
+}

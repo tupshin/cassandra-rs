@@ -5,3 +5,9 @@ cql_statement -> ParsedCqlStatement
 
 select_statement -> ParsedCqlStatement
     = "select" { ParsedCqlStatement::Select }
+
+insert_statement -> ParsedCqlStatement
+    = "insert" { ParsedCqlStatement::Insert }
+
+delete_statement -> ParsedCqlStatement
+    = "insert" { ParsedCqlStatement::Delete }

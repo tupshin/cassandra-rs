@@ -1,3 +1,6 @@
+#![feature(plugin)]
+#![plugin(peg_syntax_ext)]
+
 extern crate libc;
 
 pub use cql_ffi::consistency::*;
@@ -57,3 +60,6 @@ mod cql_ffi {
     pub mod helpers;
     pub mod column;
 }
+
+pub mod parser;
+pub mod cql;

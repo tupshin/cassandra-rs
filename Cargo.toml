@@ -6,8 +6,7 @@ homepage = "https://github.com/tupshin/cassandra-rust"
 repository = "https://github.com/tupshin/cassandra-rust"
 name = "cassandra"
 version = "0.3.0"
-authors = ["Tupshin Harper <tupshin@tupshin.com>"]
-
+authors = ["Tupshin Harper <tupshin@tupshin.com>", "Jon Haddad <jon@jonhaddad.com>"]
 
 
 [lib]
@@ -17,6 +16,9 @@ name = "cassandra"
 cql_bindgen = "*"
 libc = "*"
 num = "*"
+
+[dependencies.peg]
+git = "https://github.com/kevinmehall/rust-peg.git"
 
 [[bin]]
 name="async"

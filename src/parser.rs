@@ -56,6 +56,9 @@ fn test_where() {
 fn test_select_with_limit() {
     assert!(cql::cql_statement("select * from blah
                                 LIMIT 1").is_ok());
+    assert!(cql::cql_statement("select * from blah
+                                WHERE a = ? and b = ?
+                                LIMIT 1").is_ok());
 }
 
 #[test]

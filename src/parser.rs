@@ -41,3 +41,8 @@ fn test_invalid_selec() {
 fn test_fields() {
     assert!(cql::fields("name, age").is_ok());
 }
+
+#[test]
+fn test_where_clause() {
+    assert!(cql::predicate("term > 30").is_ok());
+}

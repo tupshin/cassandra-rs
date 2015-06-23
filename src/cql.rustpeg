@@ -5,7 +5,7 @@ cql_statement -> ParsedCqlStatement
     = select_statement / insert_statement / delete_statement / update_statement
 
 select_statement -> ParsedCqlStatement
-    = select fields from table { ParsedCqlStatement::Select }
+    = select fields from table where_clauses? { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
     = "insert" { ParsedCqlStatement::Insert }
@@ -16,6 +16,17 @@ delete_statement -> ParsedCqlStatement
 update_statement -> ParsedCqlStatement
     = "insert" { ParsedCqlStatement::Update }
 
+#[pub]
+where_clauses = where predicates
+
+predicates = predicate ++ and
+
+#[pub]
+predicate = field op
+
+op = '=' / '<' / '>' / '<=' / '>=' / "contains"i / "contains key"i
+
+and = __ "and"i __
 from = __ "from"i __
 where = __ "where"i  __
 star = __ "*" __

@@ -13,21 +13,22 @@ insert_statement -> ParsedCqlStatement
     { ParsedCqlStatement::Insert }
 
 delete_statement -> ParsedCqlStatement
-    = "delete"i { ParsedCqlStatement::Delete }
+    = delete from table where_clauses { ParsedCqlStatement::Delete }
 
 update_statement -> ParsedCqlStatement
     = "update"i { ParsedCqlStatement::Update }
 
 #[pub]
-where_clauses = where predicates
+where_clauses = where __ predicates __
 
-predicates = predicate ++ and
+predicates = __ predicate ++ and __
 
 #[pub]
 predicate = field op placeholder
 
 op = '=' / '<' / '>' / '<=' / '>=' / "contains"i / "contains key"i
 
+delete = __ "delete" __
 placeholder = __ "?" __
 and = __ "and"i __
 from = __ "from"i __

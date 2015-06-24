@@ -86,3 +86,8 @@ fn test_basic_insert() {
     assert!(cql::cql_statement("insert into blah (name, value)
                                 values (?, ?)").is_ok());
 }
+
+#[test]
+fn test_basic_delete() {
+    assert!(cql::cql_statement("delete from blah where x = ?").is_ok());
+}

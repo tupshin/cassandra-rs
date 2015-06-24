@@ -8,7 +8,7 @@ select_statement -> ParsedCqlStatement
     = select fields_or_star from table where_clauses? order_by_clause? limit_clause? { ParsedCqlStatement::Select }
 
 insert_statement -> ParsedCqlStatement
-    = "insert" __ "into" __ table __ "(" fields ")" values
+    = "insert" into  table __ "(" fields ")" values
         "(" placeholder ++ ","  ")"
     { ParsedCqlStatement::Insert }
 
@@ -42,6 +42,7 @@ field = __ [a-zA-Z0-9]+ __
 values = __ "values"i __
 update = __ "update"i __
 set = __ "set"i __
+into = __ "into"i __
 
 order_by_clause = "order" __ "by" __ field __ order_direction? {}
 

@@ -145,3 +145,12 @@ fn test_if_clause() {
     assert!(tmp.is_ok());
 
 }
+
+fn test_update_using() {
+    let tmp = cql::cql_statement("update men
+                                    using ttl 60
+                                    set bal = ?
+                                  where k = ? ");
+    assert!(tmp.is_ok());
+
+}

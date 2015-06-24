@@ -17,7 +17,9 @@ delete_statement -> ParsedCqlStatement
     = delete from table where_clauses { ParsedCqlStatement::Delete }
 
 update_statement -> ParsedCqlStatement
-    = update table set (field __ op __ placeholder)+
+    = update table
+        using_clause?
+        set (field __ op __ placeholder)+
         where_clauses if_clause?
         { ParsedCqlStatement::Update }
 

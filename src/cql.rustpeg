@@ -32,7 +32,8 @@ predicates = __ predicate ++ and __
 predicate = field op placeholder
 
 op = '=' / '<' / '>' / '<=' / '>=' / "contains"i / "contains key"i
-
+plus = "+" __
+minus = "-" __
 delete = __ "delete" __
 placeholder = __ "?" __
 and = __ "and"i __

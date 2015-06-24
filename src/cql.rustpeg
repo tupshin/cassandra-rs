@@ -49,6 +49,8 @@ if_not_exists = __ "if"i __ "not"i __ "exists" __
 timestamp = "timestamp"i __
 ttl = "ttl"i __
 
+if = "if"i __
+
 #[pub]
 using_clause = using using_options ++ "and"i
 

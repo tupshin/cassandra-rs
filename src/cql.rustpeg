@@ -11,10 +11,12 @@ insert_statement -> ParsedCqlStatement
     = "insert" into  table __ "(" fields ")" values
         "(" placeholder ++ ","  ")" __ if_not_exists?
         using_clause?
-    { ParsedCqlStatement::Insert }
+      { ParsedCqlStatement::Insert }
 
 delete_statement -> ParsedCqlStatement
-    = delete from table where_clauses { ParsedCqlStatement::Delete }
+    = delete from table
+      where_clauses
+      { ParsedCqlStatement::Delete }
 
 update_statement -> ParsedCqlStatement
     = update table

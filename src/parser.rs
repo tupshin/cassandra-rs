@@ -159,20 +159,30 @@ fn test_update_using() {
 // counters
 #[test]
 fn test_counters() {
-    cql::counter_op("blah = blah + 1");
-    cql::counter_op("blah = blah - 1");
-    cql::counter_op("blah = blah - ?");
+    assert!(cql::counter_op("blah = blah + 1").is_ok());
+    assert!(cql::counter_op("blah = blah - 1").is_ok());
+    assert!(cql::counter_op("blah = blah - ?").is_ok());
+
     let q = "update whatever
              set k = k + 1
              where bacon = ?";
     assert!(cql::cql_statement(q).is_ok());
 }
 
+/*
+<map-literal> ::= '{' ( <term> ':' <term> ( ',' <term> ':' <term> )* )? '}'
+        <set-literal> ::= '{' ( <term> ( ',' <term> )* )? '}'
+       <list-literal> ::= '[' ( <term> ( ',' <term> )* )? ']'
+       */
+#[test]
+fn test_maps() {
+    
+}
+
 // lists
 
 // sets
 
-// maps
 
 // in()
 

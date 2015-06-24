@@ -80,7 +80,7 @@ order_direction = asc / desc
 assignment = (field eq placeholder) / counter_op
 
 #[pub]
-counter_op = field eq field (plus / minus) int
+counter_op = field eq field (plus / minus) (int / placeholder)
 
 #[pub]
 fields = (field ++ ",")

@@ -91,3 +91,8 @@ fn test_basic_insert() {
 fn test_basic_delete() {
     assert!(cql::cql_statement("delete from blah where x = ?").is_ok());
 }
+
+#[test]
+fn test_simple_update() {
+    assert!(cql::cql_statement("update men set bal = ? where k = ?").is_ok());
+}

@@ -16,10 +16,13 @@ delete_statement -> ParsedCqlStatement
     = delete from table where_clauses { ParsedCqlStatement::Delete }
 
 update_statement -> ParsedCqlStatement
-    = "update"i { ParsedCqlStatement::Update }
+    = update table set (field __ placeholder)+
+        where_clause { ParsedCqlStatement::Update }
 
 #[pub]
 where_clauses = where __ predicates __
+
+where_clause = where __ predicate __
 
 predicates = __ predicate ++ and __
 
@@ -37,6 +40,8 @@ star = __ "*" __
 select = __ "select"i __
 field = __ [a-zA-Z0-9]+ __
 values = __ "values"i __
+update = __ "update"i __
+set = __ "set"i __
 
 order_by_clause = "order" __ "by" __ field __ order_direction? {}
 

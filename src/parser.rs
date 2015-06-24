@@ -116,3 +116,24 @@ fn test_if_not_exists() {
     assert!(cql::cql_statement(q).is_ok());
 
 }
+
+#[test]
+fn test_ttl() {
+    assert!(cql::using_clause("using ttl 60").is_ok());
+    let q = "insert into users (name, age)
+                values (?, ?)
+                using ttl 60";
+    assert!(cql::cql_statement(q).is_ok());
+
+}
+
+
+#[test]
+fn test_timestamp() {
+    assert!(cql::using_clause("using timestamp 60").is_ok());
+    let q = "insert into users (name, age)
+                values (?, ?)
+                using timestamp 60";
+    assert!(cql::cql_statement(q).is_ok());
+
+}

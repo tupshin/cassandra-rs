@@ -18,7 +18,8 @@ delete_statement -> ParsedCqlStatement
 
 update_statement -> ParsedCqlStatement
     = update table set (field __ op __ placeholder)+
-        where_clauses { ParsedCqlStatement::Update }
+        where_clauses if_clause?
+        { ParsedCqlStatement::Update }
 
 #[pub]
 where_clauses = where __ predicates __
@@ -48,8 +49,13 @@ using = "using"i __
 if_not_exists = __ "if"i __ "not"i __ "exists" __
 timestamp = "timestamp"i __
 ttl = "ttl"i __
+eq = "=" __
 
 if = "if"i __
+
+if_clause = if if_condition ++ "and"
+if_condition = (field eq placeholder) /
+                (field "[" field "]" eq placeholder)
 
 #[pub]
 using_clause = using using_options ++ "and"i

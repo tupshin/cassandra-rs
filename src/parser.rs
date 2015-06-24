@@ -137,3 +137,11 @@ fn test_timestamp() {
     assert!(cql::cql_statement(q).is_ok());
 
 }
+
+#[test]
+fn test_if_clause() {
+    let tmp = cql::cql_statement("update men set bal = ?
+                                  where k = ? if bal = ?");
+    assert!(tmp.is_ok());
+
+}

@@ -146,6 +146,7 @@ fn test_if_clause() {
 
 }
 
+#[test]
 fn test_update_using() {
     let tmp = cql::cql_statement("update men
                                     using ttl 60

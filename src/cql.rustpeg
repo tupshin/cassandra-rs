@@ -63,7 +63,7 @@ if_condition = (field eq placeholder) /
                 (field "[" field "]" eq placeholder)
 
 #[pub]
-using_clause = using using_options ++ "and"i
+using_clause = using using_options ++ "and"i __
 
 using_options = timestamp_clause / ttl_clause
 timestamp_clause = timestamp int
@@ -80,11 +80,11 @@ order_direction = asc / desc
 fields = (field ++ ",")
 fields_or_star = fields / star
 
-table = [a-zA-Z]+
-limit = "limit"i
+table = [a-zA-Z]+ __
+limit = "limit"i __
 int = [1-9][0-9]* __
 
-limit_clause = __ limit __ int __
+limit_clause = __ limit int __
 
 __ = (whitespace / eol)*
 

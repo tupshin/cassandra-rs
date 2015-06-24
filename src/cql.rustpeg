@@ -17,7 +17,7 @@ delete_statement -> ParsedCqlStatement
 
 update_statement -> ParsedCqlStatement
     = update table set (field __ op __ placeholder)+
-        where_clause { ParsedCqlStatement::Update }
+        where_clauses { ParsedCqlStatement::Update }
 
 #[pub]
 where_clauses = where __ predicates __

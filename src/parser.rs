@@ -176,7 +176,7 @@ fn test_counters() {
        */
 #[test]
 fn test_maps() {
-    
+    let q = "{}";
 }
 
 // lists

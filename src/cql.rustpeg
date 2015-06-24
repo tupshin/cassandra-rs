@@ -56,8 +56,10 @@ if_not_exists = __ "if"i __ "not"i __ "exists" __
 timestamp = "timestamp"i __
 ttl = "ttl"i __
 eq = "=" __
-
+lbracket = "{" __
+rbracket = "}" __
 if = "if"i __
+colon = ":" __ 
 
 if_clause = if if_condition ++ "and"
 if_condition = (field eq placeholder) /
@@ -81,6 +83,9 @@ assignment = (field eq placeholder) / counter_op
 
 #[pub]
 counter_op = field eq field (plus / minus) (int / placeholder)
+
+#[pub]
+map_literal = lbracket (field colon placeholder ++ comma) rbracket
 
 #[pub]
 fields = (field ++ ",")

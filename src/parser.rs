@@ -155,3 +155,28 @@ fn test_update_using() {
     assert!(tmp.is_ok());
 
 }
+
+// counters
+#[test]
+fn test_counters() {
+    cql::counter_op("blah = blah + 1");
+    cql::counter_op("blah = blah - 1");
+    cql::counter_op("blah = blah - ?");
+    let q = "update whatever
+             set k = k + 1
+             where bacon = ?";
+    assert!(cql::cql_statement(q).is_ok());
+}
+
+// lists
+
+// sets
+
+// maps
+
+// in()
+
+
+// delete using timestamp
+
+// delete using ttl

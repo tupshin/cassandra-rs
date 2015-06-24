@@ -21,7 +21,7 @@ delete_statement -> ParsedCqlStatement
 update_statement -> ParsedCqlStatement
     = update table
         using_clause?
-        set (field __ op __ placeholder)+
+        set assignment ++ comma
         where_clauses if_clause?
         { ParsedCqlStatement::Update }
 
@@ -38,6 +38,7 @@ predicate = field op placeholder
 op = '=' / '<' / '>' / '<=' / '>=' / "contains"i / "contains key"i
 plus = "+" __
 minus = "-" __
+comma = "," __
 delete = "delete" __
 placeholder = __ "?" __
 and = __ "and"i __
@@ -75,6 +76,11 @@ asc = "asc"i
 desc = "desc"i
 order_direction = asc / desc
 
+#[pub]
+assignment = (field eq placeholder) / counter_op
+
+#[pub]
+counter_op = field eq field (plus / minus) int
 
 #[pub]
 fields = (field ++ ",")

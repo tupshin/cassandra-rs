@@ -9,7 +9,7 @@ select_statement -> ParsedCqlStatement
 
 insert_statement -> ParsedCqlStatement
     = "insert" into  table __ "(" fields ")" values
-        "(" placeholder ++ ","  ")"
+        "(" placeholder ++ ","  ")" if_not_exists?
     { ParsedCqlStatement::Insert }
 
 delete_statement -> ParsedCqlStatement
@@ -44,6 +44,7 @@ update = __ "update"i __
 set = __ "set"i __
 into = __ "into"i __
 using = __ "using"i __
+if_not_exists = __ "if"i __ "not"i __ "exists"
 
 order_by_clause = "order" __ "by" __ field __ order_direction? {}
 

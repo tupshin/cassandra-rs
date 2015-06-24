@@ -107,3 +107,12 @@ fn test_update_two_fields() {
                                   where k = ? and v = ?");
     assert!(tmp.is_ok());
 }
+
+#[test]
+fn test_if_not_exists() {
+    let q = "insert into users (name, age)
+                values (?, ?)
+                if not exists";
+    assert!(cql::cql_statement(q).is_ok());
+
+}

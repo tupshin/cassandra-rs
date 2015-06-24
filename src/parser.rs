@@ -96,3 +96,14 @@ fn test_basic_delete() {
 fn test_simple_update() {
     assert!(cql::cql_statement("update men set bal = ? where k = ?").is_ok());
 }
+
+#[test]
+fn test_multiple_where_clauses() {
+    assert!(cql::where_clauses("where k = ? and v = ?").is_ok());
+}
+#[test]
+fn test_update_two_fields() {
+    let tmp = cql::cql_statement("update men set bal = ?
+                                  where k = ? and v = ?");
+    assert!(tmp.is_ok());
+}

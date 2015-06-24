@@ -43,6 +43,7 @@ values = __ "values"i __
 update = __ "update"i __
 set = __ "set"i __
 into = __ "into"i __
+using = __ "using"i __
 
 order_by_clause = "order" __ "by" __ field __ order_direction? {}
 

@@ -74,3 +74,7 @@ path="src/examples/udt.rs"
 [[bin]]
 name="uuids"
 path="src/examples/uuids.rs"
+
+[[bin]]
+name="prepared_macro"
+path="src/examples/prepared_macro.rs"

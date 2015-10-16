@@ -63,6 +63,12 @@ fn select_from_basic(session: &mut Session,
     }
 }
 
+macro_rules! prepare {
+    ($expr:expr, ($types:pat),*) => ();
+}
+
+
+
 fn main() {
     let mut cluster = Cluster::new();
     cluster.set_contact_points("127.0.0.1").unwrap();
@@ -82,7 +88,7 @@ fn main() {
     insert_into_basic(&mut session, "prepared_test", &mut input).unwrap();
     println!("Preparing");
 
-    let prepared = prepare!("SELECT * FROM examples.basic WHERE key = ?").unwrap();
+    let prepared = prepare!("SELECT * FROM examples.basic WHERE key = ?", i64).unwrap();
 
     // match session.prepare(SELECT_QUERY).unwrap().wait() {
     //     Ok(prepared) => {

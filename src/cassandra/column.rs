@@ -263,7 +263,7 @@ impl Column {
     pub fn get_string(&self) -> Result<String, CassError> {
         unsafe {
             match cass_value_type(self.0) {
-                CASS_VALUE_TYPE_ASCII | CASS_VALUE_TYPE_TEXT | CASS_VALUE_TYPE_VARCHAR => {
+                CASS_VALUE_TYPE_ASCII | CASS_VALUE_TYPE_TEXT | CASS_VALUE_TYPE_VARCHAR | CASS_VALUE_TYPE_BLOB => {
                     let mut message = mem::zeroed();
                     let mut message_length = mem::zeroed();
                     match cass_value_get_string(self.0, &mut message, &mut message_length) {

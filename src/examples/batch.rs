@@ -1,8 +1,8 @@
 #[macro_use(stmt)]
 extern crate cassandra;
 use cassandra::*;
-use std::str::FromStr;
 use errors::*;
+use std::str::FromStr;
 
 struct Pair<'a> {
     key: &'a str,
@@ -39,12 +39,22 @@ fn main() {
                      \'replication_factor\': \'1\' };";
     let create_table = "CREATE TABLE IF NOT EXISTS examples.pairs (key text, value text, PRIMARY KEY (key));";
 
-    let pairs = vec!(
-        Pair{key:"a", value:"1"},
-        Pair{key:"b", value:"2"},
-        Pair{key:"c", value:"3"},
-        Pair{key:"d", value:"4"},
-    );
+    let pairs = vec![Pair {
+                         key: "a",
+                         value: "1",
+                     },
+                     Pair {
+                         key: "b",
+                         value: "2",
+                     },
+                     Pair {
+                         key: "c",
+                         value: "3",
+                     },
+                     Pair {
+                         key: "d",
+                         value: "4",
+                     }];
 
     let mut cluster = Cluster::default();
     cluster.set_contact_points(ContactPoints::from_str("127.0.0.1").unwrap()).unwrap();

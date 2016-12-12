@@ -23,7 +23,6 @@ use cassandra_sys::cass_error_result_responses_required;
 use cassandra_sys::cass_error_result_table;
 use cassandra_sys::cass_error_result_write_type;
 use errors::*;
-use errors::*;
 use std::{fmt, mem, slice, str};
 use std::error::Error as IError;
 // use std::error::Error;

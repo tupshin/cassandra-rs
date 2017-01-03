@@ -103,7 +103,7 @@ impl FromStr for ContactPoints {
 /// use cassandra::{Cluster,ContactPoints};
 /// let mut cluster = Cluster::default();
 /// cluster.set_contact_points(ContactPoints::from_str("127.0.0.1").unwrap()).unwrap();
-/// let mut session = cluster.connect().unwrap();
+/// let session = cluster.connect().unwrap();
 /// ```
 #[derive(Debug)]
 pub struct Cluster(pub *mut _Cluster);

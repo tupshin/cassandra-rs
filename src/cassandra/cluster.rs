@@ -1,4 +1,3 @@
-
 #[macro_use]
 use cassandra::future::ConnectFuture;
 use cassandra::policy::retry::RetryPolicy;
@@ -51,8 +50,6 @@ use cassandra_sys::cass_session_connect;
 use cassandra_sys::cass_session_new;
 use cassandra_sys::cass_true;
 use errors::*;
-// use ip::IpAddr;
-use errors::*;
 use std::ffi::CString;
 use std::ffi::NulError;
 use std::fmt;
@@ -101,12 +98,12 @@ impl FromStr for ContactPoints {
 /// Cassandra cluster that your application interacts with.
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// use std::str::FromStr;
 /// use cassandra::{Cluster,ContactPoints};
 /// let mut cluster = Cluster::default();
 /// cluster.set_contact_points(ContactPoints::from_str("127.0.0.1").unwrap()).unwrap();
-/// let mut session = cluster.connect().unwrap();
+/// let session = cluster.connect().unwrap();
 /// ```
 #[derive(Debug)]
 pub struct Cluster(pub *mut _Cluster);

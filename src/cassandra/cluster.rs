@@ -1,4 +1,3 @@
-
 #[macro_use]
 use cassandra::future::ConnectFuture;
 use cassandra::policy::retry::RetryPolicy;
@@ -50,8 +49,6 @@ use cassandra_sys::cass_future_error_code;
 use cassandra_sys::cass_session_connect;
 use cassandra_sys::cass_session_new;
 use cassandra_sys::cass_true;
-use errors::*;
-// use ip::IpAddr;
 use errors::*;
 use std::ffi::CString;
 use std::ffi::NulError;

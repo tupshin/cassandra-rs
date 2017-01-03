@@ -98,7 +98,7 @@ impl FromStr for ContactPoints {
 /// Cassandra cluster that your application interacts with.
 ///
 /// # Examples
-/// ```
+/// ```rust,no_run
 /// use std::str::FromStr;
 /// use cassandra::{Cluster,ContactPoints};
 /// let mut cluster = Cluster::default();

@@ -7,8 +7,7 @@ use cassandra::schema::keyspace_meta::KeyspaceMeta;
 use cassandra::schema::table_meta::TableMeta;
 use cassandra::util::Protected;
 use cassandra::value::Value;
-
-use cassandra_sys::CASS_OK;
+use cassandra::error::*;
 
 // use cassandra_sys::CassIteratorType as _CassIteratorType;
 use cassandra_sys::CassIterator as _CassIterator;
@@ -34,6 +33,10 @@ use std::{mem, slice, str};
 #[derive(Debug)]
 pub struct AggregateIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for AggregateIterator {}
+
 impl Drop for AggregateIterator {
     fn drop(&mut self) { unsafe { cass_iterator_free(self.0) } }
 }
@@ -56,6 +59,10 @@ impl Iterator for AggregateIterator {
 /// Iterater over the fields of a UDT
 #[derive(Debug)]
 pub struct UserTypeIterator(*mut _CassIterator);
+
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for UserTypeIterator {}
 
 impl Drop for UserTypeIterator {
     fn drop(&mut self) { unsafe { cass_iterator_free(self.0) } }
@@ -85,6 +92,10 @@ impl UserTypeIterator {
 #[derive(Debug)]
 pub struct FunctionIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for FunctionIterator {}
+
 impl Iterator for FunctionIterator {
     type Item = FunctionMeta;
     fn next(&mut self) -> Option<<Self as Iterator>::Item> {
@@ -102,6 +113,10 @@ impl Iterator for FunctionIterator {
 #[derive(Debug)]
 pub struct TableIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for TableIterator {}
+
 impl Iterator for TableIterator {
     type Item = TableMeta;
     fn next(&mut self) -> Option<<Self as Iterator>::Item> {
@@ -117,6 +132,10 @@ impl Iterator for TableIterator {
 /// Iterater over the keyspace's metadata entries(??)
 #[derive(Debug)]
 pub struct KeyspaceIterator(*mut _CassIterator);
+
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for KeyspaceIterator {}
 
 impl Iterator for KeyspaceIterator {
     type Item = KeyspaceMeta;
@@ -134,6 +153,10 @@ impl Iterator for KeyspaceIterator {
 #[derive(Debug)]
 pub struct ColumnIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for ColumnIterator {}
+
 impl Iterator for ColumnIterator {
     type Item = ColumnMeta;
     fn next(&mut self) -> Option<<Self as Iterator>::Item> {
@@ -150,6 +173,10 @@ impl Iterator for ColumnIterator {
 #[derive(Debug)]
 pub struct FieldIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for FieldIterator {}
+
 impl Iterator for FieldIterator {
     type Item = Field;
     #[allow(cast_possible_truncation)]
@@ -160,17 +187,15 @@ impl Iterator for FieldIterator {
                 cass_true => {
                     let mut name = mem::zeroed();
                     let mut name_length = mem::zeroed();
-                    match cass_iterator_get_meta_field_name(self.0, &mut name, &mut name_length) {
-                        CASS_OK => {
+                    cass_iterator_get_meta_field_name(self.0, &mut name, &mut name_length).to_result(())
+                        .and_then(|_| {
                             let slice = slice::from_raw_parts(name as *const u8, name_length as usize);
-                            Some(Field {
-                                name: str::from_utf8(slice).expect("must be utf8").to_owned(),
-                                value: Value::build(cass_iterator_get_meta_field_value(self.0)),
-                            })
+                            let name = str::from_utf8(slice)?.to_owned();
+                            let value = Value::build(cass_iterator_get_meta_field_value(self.0));
+                            Ok(Some(Field { name, value }))
                         }
-                        err => panic!("FIXME: no error handling. Err {:?}", err),
-                    }
-                }
+                    )
+                }.expect("Cassandra error during iteration")
             }
         }
     }
@@ -242,6 +267,10 @@ impl Protected<*mut _CassIterator> for SetIterator {
 #[derive(Debug)]
 pub struct SetIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for SetIterator {}
+
 // impl<'a> Display for &'a SetIterator {
 //    fn fmt(&self, f:&mut Formatter) -> fmt::Result {
 //        for item in self {
@@ -277,6 +306,10 @@ impl SetIterator {
 #[derive(Debug)]
 pub struct MapIterator(*mut _CassIterator);
 
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for MapIterator {}
+
 impl MapIterator {
     fn get_key(&mut self) -> Value { unsafe { Value::build(cass_iterator_get_map_key(self.0)) } }
     fn get_value(&mut self) -> Value { unsafe { Value::build(cass_iterator_get_map_value(self.0)) } }
@@ -288,6 +321,10 @@ impl MapIterator {
 /// An iterator over the elements of a Cassandra tuple
 #[derive(Debug)]
 pub struct TupleIterator(pub *mut _CassIterator);
+
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for TupleIterator {}
 
 impl Drop for TupleIterator {
     fn drop(&mut self) { unsafe { cass_iterator_free(self.0) } }
@@ -326,3 +363,4 @@ impl Iterator for MapIterator {
         }
     }
 }
+

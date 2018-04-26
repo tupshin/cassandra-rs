@@ -1,13 +1,14 @@
 
 
 use cassandra::data_type::ConstDataType;
-
-use cassandra::error::CassError;
 use cassandra::inet::Inet;
 use cassandra::iterator::MapIterator;
 use cassandra::iterator::SetIterator;
+use cassandra::iterator::UserTypeIterator;
 use cassandra::util::Protected;
 use cassandra::uuid::Uuid;
+use cassandra::error::*;
+
 use cassandra_sys::CASS_ERROR_LIB_INVALID_VALUE_TYPE;
 use cassandra_sys::CASS_VALUE_TYPE_ASCII;
 use cassandra_sys::CASS_VALUE_TYPE_BIGINT;
@@ -38,11 +39,11 @@ use cassandra_sys::CASS_VALUE_TYPE_UUID;
 use cassandra_sys::CASS_VALUE_TYPE_VARCHAR;
 use cassandra_sys::CASS_VALUE_TYPE_VARINT;
 use cassandra_sys::CassValue as _CassValue;
-use cassandra_sys::CassValueType as _CassValueType;
-#[allow(unused_imports)]
+use cassandra_sys::CassValueType_;
 use cassandra_sys::cass_collection_append_decimal;
 use cassandra_sys::cass_iterator_from_collection;
 use cassandra_sys::cass_iterator_from_map;
+use cassandra_sys::cass_iterator_fields_from_user_type;
 use cassandra_sys::cass_true;
 use cassandra_sys::cass_value_data_type;
 use cassandra_sys::cass_value_get_bool;
@@ -55,46 +56,135 @@ use cassandra_sys::cass_value_get_int32;
 use cassandra_sys::cass_value_get_int64;
 use cassandra_sys::cass_value_get_int8;
 use cassandra_sys::cass_value_get_string;
+use cassandra_sys::cass_value_get_uint32;
 use cassandra_sys::cass_value_get_uuid;
 use cassandra_sys::cass_value_is_collection;
 use cassandra_sys::cass_value_is_null;
-#[allow(unused_imports)]
 use cassandra_sys::cass_value_item_count;
-#[allow(unused_imports)]
 use cassandra_sys::cass_value_primary_sub_type;
-#[allow(unused_imports)]
 use cassandra_sys::cass_value_secondary_sub_type;
 use cassandra_sys::cass_value_type;
-use errors::*;
+
 use std::ffi::CString;
 use std::fmt;
 use std::fmt::{Debug, Display, Formatter};
-
 use std::mem;
+use std::ptr;
 use std::slice;
 use std::str;
 
+
+/// The type of a Cassandra value.
+#[derive(Debug, Eq, PartialEq, Copy, Clone, Hash)]
+#[allow(missing_docs)] // Meanings are defined in CQL documentation.
+#[allow(non_camel_case_types)] // Names are traditional.
+pub enum ValueType {
+    UNKNOWN,
+    CUSTOM,
+    ASCII,
+    BIGINT,
+    BLOB,
+    BOOLEAN,
+    COUNTER,
+    DECIMAL,
+    DOUBLE,
+    FLOAT,
+    INT,
+    TEXT,
+    TIMESTAMP,
+    UUID,
+    VARCHAR,
+    VARINT,
+    TIMEUUID,
+    INET,
+    DATE,
+    TIME,
+    SMALL_INT,
+    TINY_INT,
+    LIST,
+    MAP,
+    SET,
+    UDT,
+    TUPLE,
+}
+
+enhance_nullary_enum!(ValueType, CassValueType_, {
+    (UNKNOWN, CASS_VALUE_TYPE_UNKNOWN, "UNKNOWN"),
+    (CUSTOM, CASS_VALUE_TYPE_CUSTOM, "CUSTOM"),
+    (ASCII, CASS_VALUE_TYPE_ASCII, "ASCII"),
+    (BIGINT, CASS_VALUE_TYPE_BIGINT, "BIGINT"),
+    (BLOB, CASS_VALUE_TYPE_BLOB, "BLOB"),
+    (BOOLEAN, CASS_VALUE_TYPE_BOOLEAN, "BOOLEAN"),
+    (COUNTER, CASS_VALUE_TYPE_COUNTER, "COUNTER"),
+    (DECIMAL, CASS_VALUE_TYPE_DECIMAL, "DECIMAL"),
+    (DOUBLE, CASS_VALUE_TYPE_DOUBLE, "DOUBLE"),
+    (FLOAT, CASS_VALUE_TYPE_FLOAT, "FLOAT"),
+    (INT, CASS_VALUE_TYPE_INT, "INT"),
+    (TEXT, CASS_VALUE_TYPE_TEXT, "TEXT"),
+    (TIMESTAMP, CASS_VALUE_TYPE_TIMESTAMP, "TIMESTAMP"),
+    (UUID, CASS_VALUE_TYPE_UUID, "UUID"),
+    (VARCHAR, CASS_VALUE_TYPE_VARCHAR, "VARCHAR"),
+    (VARINT, CASS_VALUE_TYPE_VARINT, "VARINT"),
+    (TIMEUUID, CASS_VALUE_TYPE_TIMEUUID, "TIMEUUID"),
+    (INET, CASS_VALUE_TYPE_INET, "INET"),
+    (DATE, CASS_VALUE_TYPE_DATE, "DATE"),
+    (TIME, CASS_VALUE_TYPE_TIME, "TIME"),
+    (SMALL_INT, CASS_VALUE_TYPE_SMALL_INT, "SMALL_INT"),
+    (TINY_INT, CASS_VALUE_TYPE_TINY_INT, "TINY_INT"),
+    (LIST, CASS_VALUE_TYPE_LIST, "LIST"),
+    (MAP, CASS_VALUE_TYPE_MAP, "MAP"),
+    (SET, CASS_VALUE_TYPE_SET, "SET"),
+    (UDT, CASS_VALUE_TYPE_UDT, "UDT"),
+    (TUPLE, CASS_VALUE_TYPE_TUPLE, "TUPLE"),
+}, omit { CASS_VALUE_TYPE_LAST_ENTRY });
+
+
 /// A single primitive value or a collection of values.
 pub struct Value(*const _CassValue);
+
+// The underlying C type is read-only so thread-safe.
+unsafe impl Send for Value {}
+unsafe impl Sync for Value {}
+
 
 impl Protected<*const _CassValue> for Value {
     fn inner(&self) -> *const _CassValue { self.0 }
     fn build(inner: *const _CassValue) -> Self { Value(inner) }
 }
 
-#[derive(Debug)]
-/// The various types of types that a Cassandra value can be
-#[allow(missing_docs)]
-pub struct ValueType(_CassValueType);
-
-impl ValueType {
-    #[allow(missing_docs)]
-    pub fn build(typ: _CassValueType) -> Self { ValueType(typ) }
+/// Write a set iterator to a formatter.
+pub(crate) fn write_set<F>(f: &mut Formatter, set: Result<SetIterator>, writer: F) -> fmt::Result
+    where F: Fn(&mut Formatter, Value) -> fmt::Result
+{
+    write!(f, "[")?;
+    match set {
+        Err(_) => write!(f, "<error>")?,
+        Ok(iter) => for item in iter { writer(f, item)? },
+    }
+    write!(f, "]")?;
+    Ok(())
 }
 
-impl Protected<_CassValueType> for ValueType {
-    fn inner(&self) -> _CassValueType { self.0 }
-    fn build(inner: _CassValueType) -> Self { ValueType(inner) }
+/// Write a map iterator to a formatter.
+pub(crate) fn write_map<F>(f: &mut Formatter, set: Result<MapIterator>, writer: F) -> fmt::Result
+    where F: Fn(&mut Formatter, Value, Value) -> fmt::Result
+{
+    write!(f, "{{")?;
+    match set {
+        Err(_) => write!(f, "<error>")?,
+        Ok(iter) => for item in iter { writer(f, item.0, item.1)? },
+    }
+    write!(f, "}}")?;
+    Ok(())
+}
+
+pub(crate) fn write_value<T, F>(f: &mut Formatter, v: Result<T>, writer: F) -> fmt::Result
+    where F: Fn(&mut Formatter, T) -> fmt::Result
+{
+    match v {
+        Err(_) => write!(f, "<error>"),
+        Ok(v) => writer(f, v),
+    }
 }
 
 impl Debug for Value {
@@ -102,61 +192,34 @@ impl Debug for Value {
         if self.is_null() {
             Ok(())
         } else {
-            match self.get_type().0 {
-                CASS_VALUE_TYPE_UNKNOWN => write!(f, "{:?}", "unknown"),
-                CASS_VALUE_TYPE_CUSTOM => write!(f, "{:?}", "custom"),
-                CASS_VALUE_TYPE_ASCII |
-                CASS_VALUE_TYPE_TEXT |
-                CASS_VALUE_TYPE_VARCHAR => write!(f, "{:?}", self.get_string().unwrap()),
-                CASS_VALUE_TYPE_DECIMAL => write!(f, "{:?}", self.get_bytes().unwrap()),
-                CASS_VALUE_TYPE_COUNTER => write!(f, "{:?}", self.get_i64().unwrap()),
-                CASS_VALUE_TYPE_BIGINT => write!(f, "{:?}", self.get_i64().unwrap()),
-                CASS_VALUE_TYPE_DATE => write!(f, "{:?}", self.get_string().unwrap()),
-                CASS_VALUE_TYPE_TIME => write!(f, "{:?}", self.get_string().unwrap()),
-                CASS_VALUE_TYPE_VARINT => write!(f, "{:?}", self.get_bytes().unwrap()),
-                CASS_VALUE_TYPE_BOOLEAN => write!(f, "{:?}", self.get_bool().unwrap()),
-                CASS_VALUE_TYPE_DOUBLE => write!(f, "{:?}", self.get_dbl().unwrap()),
-                CASS_VALUE_TYPE_FLOAT => write!(f, "{:?}", self.get_flt().unwrap()),
-                CASS_VALUE_TYPE_BLOB => write!(f, "{:?}", self.get_bytes().unwrap()),
-                CASS_VALUE_TYPE_INT => write!(f, "{:?}", self.get_i32().unwrap()),
-                CASS_VALUE_TYPE_SMALL_INT => write!(f, "{:?}", self.get_i16().unwrap()),
-                CASS_VALUE_TYPE_TINY_INT => write!(f, "{:?}", self.get_i8().unwrap()),
-                CASS_VALUE_TYPE_INET => write!(f, "{:?}", self.get_inet().unwrap()),
-                CASS_VALUE_TYPE_TIMESTAMP => write!(f, "{:?}", self.get_i64().unwrap()),
-                CASS_VALUE_TYPE_TIMEUUID => write!(f, "TIMEUUID: {}", self.get_uuid().unwrap()),
-                CASS_VALUE_TYPE_LAST_ENTRY => unimplemented!(),
-                CASS_VALUE_TYPE_UUID => write!(f, "UUID: {}", self.get_uuid().unwrap()),
-                CASS_VALUE_TYPE_SET |
-                CASS_VALUE_TYPE_LIST => {
-                    write!(f, "[")?;
-                    for item in self.get_set().expect("set must be a set") {
-                        write!(f, "SET {:?} ", item)?
-                    }
-                    write!(f, "]")?;
-                    Ok(())
-                }
-                CASS_VALUE_TYPE_MAP => {
-                    for item in self.get_map().expect("map must be a map") {
-                        write!(f, "MAP {:?}:{:?}", item.0, item.1)?
-                    }
-                    Ok(())
-                }
-                CASS_VALUE_TYPE_UDT => {
-                    debug!("unimplemented for udt!");
-                    //                    for item in self.as_map_iterator().unwrap() {
-                    //                        try!(write!(f, "MAP {:?}:{:?}", item.0,item.1))
-                    //                    }
-                    Ok(())
-                }
-                CASS_VALUE_TYPE_TUPLE => {
-                    debug!("unimplemented for tuple!");
-                    //                    for item in self.as_map_iterator().unwrap() {
-                    //                        try!(write!(f, "MAP {:?}:{:?}", item.0,item.1))
-                    //                    }
-                    Ok(())
-                }
-                // FIXME
-                // err => write!(f, "{:?}", err),
+            match self.get_type() {
+                ValueType::UNKNOWN => write!(f, "<unknown>"),
+                ValueType::CUSTOM => write!(f, "<custom>"),
+                ValueType::ASCII |
+                ValueType::TEXT |
+                ValueType::VARCHAR => write_value(f, self.get_string(), |f, v| write!(f, "{:?}", v)),
+                ValueType::DECIMAL => write_value(f, self.get_bytes(), |f, v| write!(f, "{:?}", v)),
+                ValueType::COUNTER => write_value(f, self.get_i64(), |f, v| write!(f, "{:?}", v)),
+                ValueType::BIGINT => write_value(f, self.get_i64(), |f, v| write!(f, "{:?}", v)),
+                ValueType::DATE => write_value(f, self.get_string(), |f, v| write!(f, "{:?}", v)),
+                ValueType::TIME => write_value(f, self.get_string(), |f, v| write!(f, "{:?}", v)),
+                ValueType::VARINT => write_value(f, self.get_bytes(), |f, v| write!(f, "{:?}", v)),
+                ValueType::BOOLEAN => write_value(f, self.get_bool(), |f, v| write!(f, "{:?}", v)),
+                ValueType::DOUBLE => write_value(f, self.get_f64(), |f, v| write!(f, "{:?}", v)),
+                ValueType::FLOAT => write_value(f, self.get_f32(), |f, v| write!(f, "{:?}", v)),
+                ValueType::BLOB => write_value(f, self.get_bytes(), |f, v| write!(f, "{:?}", v)),
+                ValueType::INT => write_value(f, self.get_i32(), |f, v| write!(f, "{:?}", v)),
+                ValueType::SMALL_INT => write_value(f, self.get_i16(), |f, v| write!(f, "{:?}", v)),
+                ValueType::TINY_INT => write_value(f, self.get_i8(), |f, v| write!(f, "{:?}", v)),
+                ValueType::INET => write_value(f, self.get_inet(), |f, v| write!(f, "{:?}", v)),
+                ValueType::TIMESTAMP => write_value(f, self.get_i64(), |f, v| write!(f, "{:?}", v)),
+                ValueType::TIMEUUID => write_value(f, self.get_uuid(), |f, v| write!(f, "TIMEUUID: {}", v)),
+                ValueType::UUID => write_value(f, self.get_uuid(), |f, v| write!(f, "UUID: {}", v)),
+                ValueType::SET |
+                ValueType::LIST => write_set(f, self.get_set(), |f, i| write!(f, "{:?}, ", i)),
+                ValueType::MAP => write_map(f, self.get_map(), |f, k, v| write!(f, "{:?} => {:?}, ", k, v)),
+                ValueType::UDT => write!(f, "<udt>"),
+                ValueType::TUPLE => write_set(f, self.get_set(), |f, i| write!(f, "{:?}, ", i)),
             }
         }
     }
@@ -167,71 +230,42 @@ impl Display for Value {
         if self.is_null() {
             Ok(())
         } else {
-            match self.get_type().0 {
-                CASS_VALUE_TYPE_UNKNOWN => write!(f, "{}", "unknown"),
-                CASS_VALUE_TYPE_CUSTOM => write!(f, "{}", "custom"),
-                CASS_VALUE_TYPE_ASCII => write!(f, "{}", self.get_string().unwrap()),
-                CASS_VALUE_TYPE_BIGINT => write!(f, "{}", self.get_i64().unwrap()),
-                CASS_VALUE_TYPE_VARCHAR => write!(f, "{}", self.get_string().unwrap()),
-                CASS_VALUE_TYPE_BOOLEAN => write!(f, "{}", self.get_bool().unwrap()),
-                CASS_VALUE_TYPE_DOUBLE => write!(f, "{}", self.get_dbl().unwrap()),
-                CASS_VALUE_TYPE_FLOAT => write!(f, "{}", self.get_flt().unwrap()),
-                CASS_VALUE_TYPE_INT => write!(f, "{}", self.get_i32().unwrap()),
-                CASS_VALUE_TYPE_TIMEUUID => write!(f, "TIMEUUID: {}", self.get_uuid().unwrap()),
-                CASS_VALUE_TYPE_SET => {
-                    write!(f, "[")?;
-                    for item in self.get_set().expect("set must be a set") {
-                        write!(f, "{} ", item)?
-                    }
-                    write!(f, "]")?;
-                    Ok(())
-                }
-                CASS_VALUE_TYPE_MAP => {
-                    for item in self.get_map().expect("map must be a map") {
-                        write!(f, "MAP {}:{}", item.0, item.1)?
-                    }
-                    Ok(())
-                }
-                // FIXME
-                _ => write!(f, "unknown type"),
+            match self.get_type() {
+                ValueType::UNKNOWN => write!(f, "{}", "unknown"),
+                ValueType::CUSTOM => write!(f, "{}", "custom"),
+                ValueType::ASCII |
+                ValueType::TEXT |
+                ValueType::VARCHAR => write_value(f, self.get_string(), |f, v| write!(f, "{}", v)),
+                ValueType::DECIMAL => write_value(f, self.get_bytes(), |f, v| write!(f, "DECIMAL:{:?}", v)),
+                ValueType::COUNTER => write_value(f, self.get_i64(), |f, v| write!(f, "{}", v)),
+                ValueType::BIGINT => write_value(f, self.get_i64(), |f, v| write!(f, "{}", v)),
+                ValueType::DATE => write_value(f, self.get_string(), |f, v| write!(f, "{}", v)),
+                ValueType::TIME => write_value(f, self.get_string(), |f, v| write!(f, "{}", v)),
+                ValueType::VARINT => write_value(f, self.get_bytes(), |f, v| write!(f, "VARINT:{:?}", v)),
+                ValueType::BOOLEAN => write_value(f, self.get_bool(), |f, v| write!(f, "{}", v)),
+                ValueType::DOUBLE => write_value(f, self.get_f64(), |f, v| write!(f, "{}", v)),
+                ValueType::FLOAT => write_value(f, self.get_f32(), |f, v| write!(f, "{}", v)),
+                ValueType::BLOB => write_value(f, self.get_bytes(), |f, v| write!(f, "BLOB:{:?}", v)),
+                ValueType::INT => write_value(f, self.get_i32(), |f, v| write!(f, "{}", v)),
+                ValueType::SMALL_INT => write_value(f, self.get_i16(), |f, v| write!(f, "{}", v)),
+                ValueType::TINY_INT => write_value(f, self.get_i8(), |f, v| write!(f, "{}", v)),
+                ValueType::INET => write_value(f, self.get_inet(), |f, v| write!(f, "INET:{:?}", v)),
+                ValueType::TIMESTAMP => write_value(f, self.get_i64(), |f, v| write!(f, "{}", v)),
+                ValueType::TIMEUUID => write_value(f, self.get_uuid(), |f, v| write!(f, "TIMEUUID:{}", v)),
+                ValueType::UUID => write_value(f, self.get_uuid(), |f, v| write!(f, "UUID:{}", v)),
+                ValueType::SET |
+                ValueType::LIST => write_set(f, self.get_set(), |f, i| write!(f, "{}, ", i)),
+                ValueType::MAP => write_map(f, self.get_map(), |f, k, v| write!(f, "{} => {}, ", k, v)),
+                ValueType::UDT => write!(f, "<udt>"),
+                ValueType::TUPLE => write_set(f, self.get_set(), |f, i| write!(f, "{}, ", i)),
             }
         }
     }
 }
 
 impl Value {
-    // FIXME a low level optimization. not sure whether to include or not
-    //    pub fn fill_uuid(&self, mut uuid: Uuid) -> Result<Uuid, CassError> {
-    //        unsafe { CassError::build(cass_value_get_uuid(self.0, &mut uuid.0), None).wrap(uuid) }
-    //    }
-    //
-    // FIXME a low level optimization. not sure whether to include or not
-    //    pub fn fill_string(&self) -> Result<String, CassError> {
-    //        unsafe {
-    //            let output = mem::zeroed();
-    //            let output_length = mem::zeroed();
-    //            let err = cass_value_get_string(self.0, output, output_length);
-    //
-    //            let slice = slice::from_raw_parts(output as *const u8, output_length as usize);
-    //            let string = str::from_utf8(slice).unwrap().to_owned();
-    //            CassError::build(err, None).wrap(string)
-    //        }
-    //    }
 
-    //    // FIXME test this
-    //    pub fn get_bytes(&self) -> Result<Vec<u8>, CassError> {
-    //        unsafe {
-    //            let mut output: *const u8 = mem::zeroed();
-    //            let output_size = mem::zeroed();
-    //            let result = cass_value_get_bytes(self.0, &mut output, output_size);
-    //            // let output:*mut u8 = &mut*output;
-    //            let slice = Vec::from_raw_parts(output, output_size as usize, output_size as usize);
-    //            let r = CassError::build(result);
-    //            r.wrap(slice)
-    //
-    //    }
-
-    /// Gets the name of the keyspace.
+    /// Get the raw bytes of this Cassandra value.
     #[allow(cast_possible_truncation)]
     pub fn get_bytes(&self) -> Result<&[u8]> {
         unsafe {
@@ -240,7 +274,7 @@ impl Value {
             let result = cass_value_get_bytes(self.0, &mut output, &mut output_size);
             // raw2utf8(output, output_size).unwrap()
             let slice = slice::from_raw_parts(output, output_size as usize);
-            result.to_result(slice).chain_err(|| "")
+            result.to_result(slice)
         }
     }
     // pub fn get_decimal<'a>(&'a self, mut output: String) ->
@@ -250,7 +284,7 @@ impl Value {
     //    }}
 
     /// Get the type of this Cassandra value
-    pub fn get_type(&self) -> ValueType { unsafe { ValueType(cass_value_type(self.0)) } }
+    pub fn get_type(&self) -> ValueType { unsafe { ValueType::build(cass_value_type(self.0)) } }
 
     /// Get the data type of this Cassandra value
     pub fn data_type(&self) -> ConstDataType { unsafe { ConstDataType(cass_value_data_type(self.0)) } }
@@ -281,9 +315,9 @@ impl Value {
     /// Gets this value as a set iterator.
     pub fn get_set(&self) -> Result<SetIterator> {
         unsafe {
-            match self.get_type().0 {
-                CASS_VALUE_TYPE_SET => Ok(SetIterator::build(cass_iterator_from_collection(self.0))),
-                _ => Err("LIB_INVALID_VALUE_TYPE".into()),
+            match self.get_type() {
+                ValueType::SET => Ok(SetIterator::build(cass_iterator_from_collection(self.0))),
+                _ => Err(CASS_ERROR_LIB_INVALID_VALUE_TYPE.to_error()),
             }
         }
     }
@@ -291,66 +325,41 @@ impl Value {
     /// Gets this value as a map iterator.
     pub fn get_map(&self) -> Result<MapIterator> {
         unsafe {
-            match self.get_type().0 {
-                CASS_VALUE_TYPE_MAP => Ok(MapIterator::build(cass_iterator_from_map(self.0))),
-                _ => Err("LIB_INVALID_VALUE_TYPE".into()),
+            match self.get_type() {
+                ValueType::MAP => Ok(MapIterator::build(cass_iterator_from_map(self.0))),
+                _ => Err(CASS_ERROR_LIB_INVALID_VALUE_TYPE.to_error()),
             }
         }
     }
 
-    //    pub fn as_user_type_iterator(&self) -> Result<UserTypeIterator, CassError> {
-    //        unsafe {
-    //            match self.get_type() {
-    //                ValueType::UDT => Ok(UserTypeIterator(cass_iterator_from_user_type(self.0))),
-    //                _ => Err(CassError::build(CassErrorTypes::LIB_INVALID_VALUE_TYPE as u32)),
-    //            }
-    //        }
-    //    }
-
-
-    // ~ pub fn map_iter(&self) -> Result<MapIterator,CassError> {unsafe{
-    // ~ match self.get_type() {
-    // ~ ValueType::MAP => Ok(MapIterator(cass_iterator_from_map(self.0))),
-    // ~ type_no => {
-    // ~ println!("wrong_type: {:?}", type_no);
-    // ~ Err(CassError::build(CassErrorTypes::LIB_INVALID_VALUE_TYPE as
-    // u32))
-    // ~ }
-    // ~ }
-    // ~ }}
-
-    /// Get this value as a string
-    #[allow(cast_possible_truncation)]
-    pub fn get_string(&self) -> Result<&str> {
+    /// Gets an iterator over the fields of the user type in this column or errors if you ask for the wrong type
+    pub fn get_user_type(&self) -> Result<UserTypeIterator> {
         unsafe {
-            let message: CString = mem::zeroed();
-            let mut message = message.as_ptr();
-            let mut message_length = mem::zeroed();
-            cass_value_get_string(self.0, &mut message, &mut (message_length));
-
-            let slice = slice::from_raw_parts(message as *const u8, message_length as usize);
-            let err = cass_value_get_string(self.0, &mut message, &mut (message_length));
-            str::from_utf8(slice).chain_err(|| "")
-            // unimplemented!()
+            match self.get_type() {
+                ValueType::UDT => Ok(UserTypeIterator::build(cass_iterator_fields_from_user_type(self.0))),
+                _ => Err(CASS_ERROR_LIB_INVALID_VALUE_TYPE.to_error()),
+            }
         }
     }
 
-    // ~ pub fn get_string(&self) -> Result<String,CassError> {unsafe{
-    // ~ let mut output = mem::zeroed();
-    // ~ let mut output_size = mem::zeroed();
-    // ~ let output = &mut output;
-    // ~ let foo = self.0;
-    // ~ cass_value_get_string(foo, output, output_size);
-    // ~ let err = CassError::build(cass_value_get_string(self.0, output,
-    // output_size));
+    /// Get this value as a string slice
+    pub fn get_str(&self) -> Result<&str> {
+        unsafe {
+            let mut message_ptr = mem::zeroed();
+            let mut message_length = mem::zeroed();
+            cass_value_get_string(self.0, &mut message_ptr, &mut message_length).to_result(())
+                .and_then(|_| {
+                    let slice = slice::from_raw_parts(message_ptr as *const u8, message_length as usize);
+                    Ok(str::from_utf8(slice)?)
+                }
+            )
+        }
+    }
 
-    // ~ let slice = slice::from_raw_parts(output,output_size as usize);
-    // ~ let string = str::from_utf8(slice).unwrap().to_string();
-
-
-
-    // ~ err.wrap(string)
-    // ~ }}
+    /// Get this value as a string
+    pub fn get_string(&self) -> Result<String> {
+        self.get_str().map(str::to_string)
+    }
 
     /// Get this value as an Inet
     pub fn get_inet(&self) -> Result<Inet> {
@@ -358,7 +367,6 @@ impl Value {
             let output: Inet = mem::zeroed();
             cass_value_get_inet(self.0, &mut Inet::inner(&output))
                 .to_result(output)
-                .chain_err(|| "")
         }
     }
 
@@ -368,7 +376,15 @@ impl Value {
             let mut output = mem::zeroed();
             cass_value_get_int32(self.0, &mut output)
                 .to_result(output)
-                .chain_err(|| "")
+        }
+    }
+
+    /// Get this value as a u32
+    pub fn get_u32(&self) -> Result<u32> {
+        unsafe {
+            let mut output = mem::zeroed();
+            cass_value_get_uint32(self.0, &mut output)
+                .to_result(output)
         }
     }
 
@@ -378,7 +394,6 @@ impl Value {
             let mut output = mem::zeroed();
             cass_value_get_int16(self.0, &mut output)
                 .to_result(output)
-                .chain_err(|| "")
         }
     }
 
@@ -388,7 +403,6 @@ impl Value {
             let mut output = mem::zeroed();
             cass_value_get_int8(self.0, &mut output)
                 .to_result(output)
-                .chain_err(|| "")
         }
     }
 
@@ -398,27 +412,24 @@ impl Value {
             let mut output = mem::zeroed();
             cass_value_get_int64(self.0, &mut output)
                 .to_result(output)
-                .chain_err(|| "")
         }
     }
 
     /// Get this value as a float
-    pub fn get_flt(&self) -> Result<f32> {
+    pub fn get_f32(&self) -> Result<f32> {
         unsafe {
             let mut output = mem::zeroed();
             cass_value_get_float(self.0, &mut output)
                 .to_result(output)
-                .chain_err(|| "")
         }
     }
 
     /// Get this value as a double
-    pub fn get_dbl(&self) -> Result<f64> {
+    pub fn get_f64(&self) -> Result<f64> {
         unsafe {
             let mut output = mem::zeroed();
             cass_value_get_double(self.0, &mut output)
                 .to_result(output)
-                .chain_err(|| "")
         }
     }
 
@@ -428,7 +439,6 @@ impl Value {
             let mut output = mem::zeroed();
             cass_value_get_bool(self.0, &mut output)
                 .to_result(output == cass_true)
-                .chain_err(|| "")
         }
     }
 
@@ -438,7 +448,6 @@ impl Value {
             let mut uuid = mem::zeroed();
             cass_value_get_uuid(self.0, &mut uuid)
                 .to_result(Uuid::build(uuid))
-                .chain_err(|| "")
         }
     }
 }

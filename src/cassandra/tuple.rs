@@ -1,12 +1,12 @@
 use cassandra::collection::Set;
 use cassandra::data_type::ConstDataType;
 use cassandra::data_type::DataType;
-use cassandra::error::CassError;
-
-use cassandra::inet::AsInet;
+use cassandra::inet::Inet;
 use cassandra::user_type::UserType;
 use cassandra::util::Protected;
 use cassandra::uuid::Uuid;
+use cassandra::error::*;
+
 use cassandra_sys::CassTuple as _Tuple;
 use cassandra_sys::cass_false;
 use cassandra_sys::cass_true;
@@ -17,7 +17,6 @@ use cassandra_sys::cass_tuple_new_from_data_type;
 use cassandra_sys::cass_tuple_set_bool;
 use cassandra_sys::cass_tuple_set_bytes;
 use cassandra_sys::cass_tuple_set_collection;
-#[allow(unused_imports)]
 use cassandra_sys::cass_tuple_set_decimal;
 use cassandra_sys::cass_tuple_set_double;
 use cassandra_sys::cass_tuple_set_float;
@@ -32,14 +31,17 @@ use cassandra_sys::cass_tuple_set_tuple;
 use cassandra_sys::cass_tuple_set_uint32;
 use cassandra_sys::cass_tuple_set_user_type;
 use cassandra_sys::cass_tuple_set_uuid;
-use errors::*;
-use std::ffi::CString;
-use std::net::SocketAddr;
 
+use std::ffi::CString;
+use std::net::IpAddr;
 
 /// A tuple of values.
 #[derive(Debug)]
 pub struct Tuple(*mut _Tuple);
+
+// The underlying C type has no thread-local state, but does not support access
+// from multiple threads: https://datastax.github.io/cpp-driver/topics/#thread-safety
+unsafe impl Send for Tuple {}
 
 impl Protected<*mut _Tuple> for Tuple {
     fn inner(&self) -> *mut _Tuple { self.0 }
@@ -63,7 +65,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_null(self.0, index)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -72,7 +73,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_int8(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -81,7 +81,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_int16(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -90,7 +89,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_int32(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -99,7 +97,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_uint32(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -109,7 +106,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_int64(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -118,7 +114,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_float(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -127,7 +122,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_double(self.0, index, value)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -136,7 +130,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_bool(self.0, index, if value { cass_true } else { cass_false })
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -146,9 +139,8 @@ impl Tuple {
         unsafe {
             cass_tuple_set_string(self.0,
                                   index,
-                                  CString::new(value.into()).expect("must be utf8").as_ptr())
+                                  CString::new(value.into())?.as_ptr())
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -157,7 +149,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_bytes(self.0, index, value.as_ptr(), value.len())
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -167,17 +158,15 @@ impl Tuple {
         unsafe {
             cass_tuple_set_uuid(self.0, index, value.into().inner())
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
     /// Sets an "inet" in a tuple at the specified index.
-    pub fn set_inet(&mut self, index: usize, value: SocketAddr) -> Result<&mut Self> {
-        let inet = AsInet::as_cass_inet(&value);
+    pub fn set_inet(&mut self, index: usize, value: IpAddr) -> Result<&mut Self> {
+        let inet = Inet::from(&value);
         unsafe {
             cass_tuple_set_inet(self.0, index, inet.inner())
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -187,7 +176,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_collection(self.0, index, value.into().inner())
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -196,7 +184,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_tuple(self.0, index, value.0)
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 
@@ -205,7 +192,6 @@ impl Tuple {
         unsafe {
             cass_tuple_set_user_type(self.0, index, value.inner())
                 .to_result(self)
-                .chain_err(|| "")
         }
     }
 }
